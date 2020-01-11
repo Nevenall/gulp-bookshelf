@@ -23,3 +23,5 @@ which won't work by default right? we need to rewrite that import so it uses js?
 or, can we import the module from something named .svelte? as long as it's js?
 
 cuz javascript
+
+- [ ] test kimportin

@@ -31,7 +31,7 @@ function svelteTask(done) {
             // compile svelte components
             let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
 
-            file.content = Buffer.from(compiled.js.code)
+            file.contents = Buffer.from(compiled.js.code)
             done(null, file)
          })
 
