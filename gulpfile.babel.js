@@ -3,8 +3,9 @@ import { init, write } from "gulp-sourcemaps"
 import babel from "gulp-babel"
 import concat from "gulp-concat"
 import through2 from 'through2'
+import gulpif from 'gulp-if'
 
-import {compile, preprocess} from 'svelte/compiler'
+import { compile, preprocess } from 'svelte/compiler'
 
 
 // task("default", function () {
@@ -16,14 +17,24 @@ import {compile, preprocess} from 'svelte/compiler'
 //       .pipe(dest("dist"))
 // })
 
+let svelteOptions = {}
+
+
 function svelteTask(done) {
 
    return src("src/App.svelte")
-      .pipe(through2.obj(function (vinyl, _, callback) {
+      .pipe(through2.obj(function (file, encoding, done) {
 
-         let ret = compile(vinyl.contents.toString(), {})
+         let content = file.contents.toString()
+         // preprocess specially for sass
+         preprocess(content, {}).then(preprocessed => {
+            // compile svelte components
+            let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
 
-         let s = ''
+            file.content = Buffer.from(compiled.js.code)
+            done(null, file)
+         })
+
       }))
       .pipe(dest('dist'))
 }
@@ -52,6 +63,9 @@ function cleanTask(done) {
 }
 
 let build = series(cleanTask, assetsTask, svelteTask)
+
+// todo - make a watch task for development mode
+let dev = series(assetsTask, svelteTask)
 
 
 export default build
