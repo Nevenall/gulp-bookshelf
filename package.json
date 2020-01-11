@@ -9,10 +9,23 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "devDependencies": {
-    "babel": "^6.23.0",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.7.7",
     "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-svelte": "^0.8.0",
     "sass": "^1.24.4",
-    "svelte": "^3.16.7"
-  }
+    "svelte": "^3.16.7",
+    "through2": "^3.0.1"
+  },
+  "dependencies": {}
 }
