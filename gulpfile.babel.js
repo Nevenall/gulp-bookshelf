@@ -4,7 +4,7 @@ import babel from "gulp-babel"
 import concat from "gulp-concat"
 import through2 from 'through2'
 
-import {svelte} from 'svelte'
+import {compile, preprocess} from 'svelte/compiler'
 
 
 // task("default", function () {
@@ -21,8 +21,9 @@ function svelteTask(done) {
    return src("src/App.svelte")
       .pipe(through2.obj(function (vinyl, _, callback) {
 
-         let ret = svelte.compile(vinyl, {})
+         let ret = compile(vinyl.contents.toString(), {})
 
+         let s = ''
       }))
       .pipe(dest('dist'))
 }

@@ -22,7 +22,6 @@
     "gulp-babel": "^8.0.0-beta.2",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-svelte": "^0.8.0",
     "sass": "^1.24.4",
     "svelte": "^3.16.7",
     "through2": "^3.0.1"
