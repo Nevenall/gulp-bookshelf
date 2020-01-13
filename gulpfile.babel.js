@@ -17,7 +17,10 @@ import { compile, preprocess } from 'svelte/compiler'
 //       .pipe(dest("dist"))
 // })
 
-let svelteOptions = {}
+let svelteOptions = {
+    sveltePath: "svelte"
+}
+
 
 
 function svelteTask(done) {
@@ -32,13 +35,34 @@ function svelteTask(done) {
             let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
 
             file.contents = Buffer.from(compiled.js.code)
+            file.extname = '.js'
+
             done(null, file)
          })
 
       }))
+      // .pipe(babel())
       .pipe(dest('dist'))
 }
 
+function devTask(done) {
+   return src('src/main.js')
+      // .pipe(concat('main.js'))
+      // .pipe(babel())
+      .pipe(dest('dist'))
+}
+
+function staticTask(done) {
+   return src('src/index.html')
+      .pipe(dest('dist'))
+}
+
+
+function vendorTask(done) {
+   return src('node_modules/svelte/internal/index.mjs')
+      // .pipe(babel())
+      .pipe(dest('dist/svelte/internal'))
+}
 
 /* 
 so, do we run babel first? or on the svelte output? we might have 1 bigish task for building things. 
@@ -62,7 +86,7 @@ function cleanTask(done) {
    done()
 }
 
-let build = series(cleanTask, assetsTask, svelteTask)
+let build = series(cleanTask, assetsTask, svelteTask, devTask, staticTask, vendorTask)
 
 // todo - make a watch task for development mode
 let dev = series(assetsTask, svelteTask)
