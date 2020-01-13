@@ -93,6 +93,9 @@ function devTask(done) {
 
 }
 
+// build processes files, 
+// currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
+
 let build = parallel(
    staticTask,
    applicationJavascriptTask,
@@ -104,11 +107,19 @@ let build = parallel(
 // todo - make a watch task for development mode
 // export { dev } series(assetsTask, svelteTask)
 
+
+
+// dev is a task that runs a build, starts a browser-sync server, and watches src/**
+// also 
+
 let dev = watch('src/**', build)
 
-export { dev }
-
-export default series(
+// default task is to clean and run build
+let defaultTask = series(
    cleanTask,
    build
 )
+
+export { dev }
+
+export default defaultTask

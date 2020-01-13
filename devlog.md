@@ -88,12 +88,10 @@ so, we can compile pages as components because we can compile html. because that
 
 then we can use a dynamic component to show whichever page is asked for. 
 
+## 1.13.2020
 
-/* 
-so, do we run babel first? or on the svelte output? we might have 1 bigish task for building things. 
-becuase we are doing a fair bit of processing . 
+question, can we use a service worker to fake module resolution for svelte components?
+https://medium.com/chialab-open-source/a-study-about-how-to-improve-frontend-dev-experience-without-a-bundler-1b4c3a461a35
 
-So, who does 
-also, not sure I like running svelte on my index page. 
+yes, we darn well can!
 
-*/
