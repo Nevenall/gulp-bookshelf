@@ -4,6 +4,7 @@ import babel from "gulp-babel"
 import concat from "gulp-concat"
 import through2 from 'through2'
 import gulpif from 'gulp-if'
+import replace from 'gulp-replace'
 
 import { compile, preprocess } from 'svelte/compiler'
 
@@ -18,13 +19,13 @@ import { compile, preprocess } from 'svelte/compiler'
 // })
 
 let svelteOptions = {
-    sveltePath: "svelte"
+   sveltePath: "svelte"
 }
 
 
 
 function svelteTask(done) {
-
+   let exp = new RegExp('svelte/internal', 'i')
    return src("src/App.svelte")
       .pipe(through2.obj(function (file, encoding, done) {
 
@@ -42,13 +43,17 @@ function svelteTask(done) {
 
       }))
       // .pipe(babel())
+      .pipe(replace(exp, './svelte/internal/index.mjs'))
       .pipe(dest('dist'))
 }
 
 function devTask(done) {
+   let exp = new RegExp('(\w*).svelte', 'i')
+
    return src('src/main.js')
       // .pipe(concat('main.js'))
       // .pipe(babel())
+      .pipe(replace(exp, '$1.js'))
       .pipe(dest('dist'))
 }
 

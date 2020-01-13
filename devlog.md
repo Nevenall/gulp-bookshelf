@@ -83,3 +83,9 @@ rewrite svelte components to import svelte.mjs locally
 rewite imports of svelte components to use Name.js
 
 and we'll have a fair number of components, but less than 50 I think. And if we can get http2 to work...
+
+so, we can compile pages as components because we can compile html. because that's all that svelte is. 
+
+then we can use a dynamic component to show whichever page is asked for. 
+
+
