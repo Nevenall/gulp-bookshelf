@@ -89,3 +89,11 @@ so, we can compile pages as components because we can compile html. because that
 then we can use a dynamic component to show whichever page is asked for. 
 
 
+/* 
+so, do we run babel first? or on the svelte output? we might have 1 bigish task for building things. 
+becuase we are doing a fair bit of processing . 
+
+So, who does 
+also, not sure I like running svelte on my index page. 
+
+*/

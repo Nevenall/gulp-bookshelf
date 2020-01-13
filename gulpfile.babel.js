@@ -1,11 +1,11 @@
-import { series, parallel, src, dest } from "gulp"
+import { series, parallel, src, dest, watch } from "gulp"
+import through2 from 'through2'
+import replace from 'gulp-replace'
 import { init, write } from "gulp-sourcemaps"
 import babel from "gulp-babel"
 import concat from "gulp-concat"
-import through2 from 'through2'
 import gulpif from 'gulp-if'
-import replace from 'gulp-replace'
-
+import browserSync from 'browser-sync'
 import { compile, preprocess } from 'svelte/compiler'
 
 
@@ -18,15 +18,36 @@ import { compile, preprocess } from 'svelte/compiler'
 //       .pipe(dest("dist"))
 // })
 
+let fixComponentImports = replace(new RegExp('(\w*).svelte', 'i'), '$1.js')
+let fixSvelteInternalReferences = replace(new RegExp('svelte/internal', 'i'), './svelte/internal/index.mjs')
+
 let svelteOptions = {
-   sveltePath: "svelte"
 }
 
 
+let devServer = browserSync.create()
+
+function cleanTask(done) {
+
+   // clean up the dist directory before we start building
+   done()
+}
+
+
+function staticTask(done) {
+   return src('src/index.html')
+      .pipe(dest('dist'))
+}
+
+function applicationJavascriptTask(done) {
+   return src('src/main.js')
+      .pipe(fixComponentImports)
+      .pipe(dest('dist'))
+}
+
 
 function svelteTask(done) {
-   let exp = new RegExp('svelte/internal', 'i')
-   return src("src/App.svelte")
+   return src("src/**/*.svelte")
       .pipe(through2.obj(function (file, encoding, done) {
 
          let content = file.contents.toString()
@@ -42,41 +63,15 @@ function svelteTask(done) {
          })
 
       }))
-      // .pipe(babel())
-      .pipe(replace(exp, './svelte/internal/index.mjs'))
-      .pipe(dest('dist'))
-}
-
-function devTask(done) {
-   let exp = new RegExp('(\w*).svelte', 'i')
-
-   return src('src/main.js')
-      // .pipe(concat('main.js'))
-      // .pipe(babel())
-      .pipe(replace(exp, '$1.js'))
-      .pipe(dest('dist'))
-}
-
-function staticTask(done) {
-   return src('src/index.html')
+      .pipe(fixSvelteInternalReferences)
       .pipe(dest('dist'))
 }
 
 
-function vendorTask(done) {
+function svelteInternalsTask(done) {
    return src('node_modules/svelte/internal/index.mjs')
-      // .pipe(babel())
       .pipe(dest('dist/svelte/internal'))
 }
-
-/* 
-so, do we run babel first? or on the svelte output? we might have 1 bigish task for building things. 
-becuase we are doing a fair bit of processing . 
-
-So, who does 
-also, not sure I like running svelte on my index page. 
-
-*/
 
 
 function assetsTask(done) {
@@ -85,16 +80,35 @@ function assetsTask(done) {
    done()
 }
 
-function cleanTask(done) {
+function devTask(done) {
+   devServer.init({
+      server: './dist',
+      single: true,
+      port: 8080,
+      // middleware for http2
+      browser: '',
+   })
 
-   // clean up the dist directory before we start building
-   done()
+
+
 }
 
-let build = series(cleanTask, assetsTask, svelteTask, devTask, staticTask, vendorTask)
+let build = parallel(
+   staticTask,
+   applicationJavascriptTask,
+   svelteTask,
+   svelteInternalsTask,
+   assetsTask
+)
 
 // todo - make a watch task for development mode
-let dev = series(assetsTask, svelteTask)
+// export { dev } series(assetsTask, svelteTask)
 
+let dev = watch('src/**', build)
 
-export default build
+export { dev }
+
+export default series(
+   cleanTask,
+   build
+)
