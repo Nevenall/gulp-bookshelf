@@ -34,19 +34,19 @@ function cleanTask(done) {
 }
 
 
-function staticTask(done) {
+function staticTask() {
    return src('src/index.html')
       .pipe(dest('dist'))
 }
 
-function applicationJavascriptTask(done) {
+function applicationJavascriptTask() {
    return src('src/main.js')
       .pipe(fixComponentImports)
       .pipe(dest('dist'))
 }
 
 
-function svelteTask(done) {
+function svelteTask() {
    return src("src/**/*.svelte")
       .pipe(through2.obj(function (file, encoding, done) {
 
@@ -68,7 +68,7 @@ function svelteTask(done) {
 }
 
 
-function svelteInternalsTask(done) {
+function svelteInternalsTask() {
    return src('node_modules/svelte/internal/index.mjs')
       .pipe(dest('dist/svelte/internal'))
 }
@@ -80,22 +80,30 @@ function assetsTask(done) {
    done()
 }
 
+
+function serveTask(done) {
+
+   done()
+}
+
 function devTask(done) {
    devServer.init({
       server: './dist',
       single: true,
       port: 8080,
+      watch: true,
       // middleware for http2
-      browser: '',
+      browser: []
    })
 
+   watch('src/**', build)
 
+   done()
 
 }
 
 // build processes files, 
 // currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
-
 let build = parallel(
    staticTask,
    applicationJavascriptTask,
@@ -104,21 +112,19 @@ let build = parallel(
    assetsTask
 )
 
-// todo - make a watch task for development mode
-// export { dev } series(assetsTask, svelteTask)
-
+let devBuild = series(applicationJavascriptTask, svelteTask)
 
 
 // dev is a task that runs a build, starts a browser-sync server, and watches src/**
 // also 
 
-let dev = watch('src/**', build)
 
 // default task is to clean and run build
 let defaultTask = series(
    cleanTask,
    build
 )
+let dev = series(defaultTask, devTask)
 
 export { dev }
 
