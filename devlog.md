@@ -95,3 +95,10 @@ https://medium.com/chialab-open-source/a-study-about-how-to-improve-frontend-dev
 
 yes, we darn well can!
 
+
+## 1.14.2020
+
+Having some issues with watching code. I think it's the gulp-replace. Need to test that though. 
+If it is, we can skip the replacement and get the service-worker working. 
+I wonder if browser-sync can pickup service worker updates? I guess yes if it's watching the dist folder. 
+
