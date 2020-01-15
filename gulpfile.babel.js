@@ -1,4 +1,4 @@
-import { series, parallel, src, dest, watch } from "gulp"
+import { series, parallel, src, dest, watch  } from "gulp"
 import through2 from 'through2'
 import replace from 'gulp-replace'
 import { init, write } from "gulp-sourcemaps"
@@ -27,26 +27,26 @@ let svelteOptions = {
 
 let devServer = browserSync.create()
 
-function cleanTask(done) {
+function clean(done) {
 
    // clean up the dist directory before we start building
    done()
 }
 
 
-function staticTask() {
+function html() {
    return src('src/index.html')
       .pipe(dest('dist'))
 }
 
-function applicationJavascriptTask() {
-   return src('src/main.js')
-      .pipe(fixComponentImports)
+function js() {
+   return src('src/**/*.js')
+      // .pipe(fixComponentImports)
       .pipe(dest('dist'))
 }
 
 
-function svelteTask() {
+function components() {
    return src("src/**/*.svelte")
       .pipe(through2.obj(function (file, encoding, done) {
 
@@ -63,40 +63,34 @@ function svelteTask() {
          })
 
       }))
-      .pipe(fixSvelteInternalReferences)
+      // .pipe(fixSvelteInternalReferences)
       .pipe(dest('dist'))
 }
 
 
-function svelteInternalsTask() {
+function internals() {
    return src('node_modules/svelte/internal/index.mjs')
       .pipe(dest('dist/svelte/internal'))
 }
 
 
-function assetsTask(done) {
+function assets() {
    // copy static files
-
-   done()
+   return src('static/**')
+   .pipe(dest('dist'))
 }
 
 
-function serveTask(done) {
-
-   done()
-}
-
-function devTask(done) {
+function develop(done) {
    devServer.init({
       server: './dist',
       single: true,
       port: 8080,
-      watch: true,
+      files: ['dist/**'],
+      open: false
       // middleware for http2
-      browser: []
    })
-
-   watch('src/**', build)
+   watch('src/**', parallel(html, js))
 
    done()
 
@@ -105,15 +99,12 @@ function devTask(done) {
 // build processes files, 
 // currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
 let build = parallel(
-   staticTask,
-   applicationJavascriptTask,
-   svelteTask,
-   svelteInternalsTask,
-   assetsTask
+   html,
+   js,
+   components,
+   internals,
+   assets
 )
-
-let devBuild = series(applicationJavascriptTask, svelteTask)
-
 
 // dev is a task that runs a build, starts a browser-sync server, and watches src/**
 // also 
@@ -121,11 +112,9 @@ let devBuild = series(applicationJavascriptTask, svelteTask)
 
 // default task is to clean and run build
 let defaultTask = series(
-   cleanTask,
+   clean,
    build
 )
-let dev = series(defaultTask, devTask)
 
-export { dev }
 
 export default defaultTask
