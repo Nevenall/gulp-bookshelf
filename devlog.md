@@ -102,3 +102,7 @@ Having some issues with watching code. I think it's the gulp-replace. Need to te
 If it is, we can skip the replacement and get the service-worker working. 
 I wonder if browser-sync can pickup service worker updates? I guess yes if it's watching the dist folder. 
 
+## 1.16.2020
+
+Yes, we can use a service worker to intercept requests to imports and resolve them ourselfs. 
+That is amazing. 
