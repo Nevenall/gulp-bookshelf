@@ -1,4 +1,4 @@
-import { series, parallel, src, dest, watch  } from "gulp"
+import { series, parallel, src, dest, watch } from "gulp"
 import through2 from 'through2'
 import replace from 'gulp-replace'
 import { init, write } from "gulp-sourcemaps"
@@ -77,7 +77,7 @@ function internals() {
 function assets() {
    // copy static files
    return src('static/**')
-   .pipe(dest('dist'))
+      .pipe(dest('dist'))
 }
 
 
@@ -90,7 +90,7 @@ function develop(done) {
       open: false
       // middleware for http2
    })
-   watch('src/**', parallel(html, js))
+   watch('src/**', build)
 
    done()
 
@@ -116,5 +116,6 @@ let defaultTask = series(
    build
 )
 
+let devTask = series(build, develop)
 
-export default defaultTask
+export { defaultTask as default, devTask as watch }
