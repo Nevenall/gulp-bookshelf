@@ -1,6 +1,4 @@
-/**
- * Unchained ServiceWorker sample.
- */
+
 
 // promptly activate the ServiceWorker.
 self.addEventListener('install', (event) => {
@@ -15,6 +13,10 @@ self.addEventListener('activate', (event) => {``
 self.addEventListener('fetch', (event) => {
    // check if requested resource is an import.
    console.log(event.request.url)
+
+   if(event.request.url.endsWith('.svelte')){
+      event.respondWith()
+   }
 
    // todo - if the url is for a .svelte component, respond with that component with js content-type
    // if the request is for a svelte/internal then hopefully we can resolve to the correct index.mjs
