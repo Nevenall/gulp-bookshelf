@@ -106,3 +106,10 @@ I wonder if browser-sync can pickup service worker updates? I guess yes if it's 
 
 Yes, we can use a service worker to intercept requests to imports and resolve them ourselfs. 
 That is amazing. 
+
+
+## 1.19.2020
+
+The service worker handles the module imports now!
+did a special rebuild task that doesn't include the slow assets task. 
+We can now start building our site!
