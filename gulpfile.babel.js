@@ -18,12 +18,10 @@ import { compile, preprocess } from 'svelte/compiler'
 //       .pipe(dest("dist"))
 // })
 
-let fixComponentImports = replace(new RegExp('(\w*).svelte', 'i'), '$1.js')
-let fixSvelteInternalReferences = replace(new RegExp('svelte/internal', 'i'), './svelte/internal/index.mjs')
 
 let svelteOptions = {
+   sveltePath: './svelte'
 }
-
 
 let devServer = browserSync.create()
 
@@ -57,13 +55,11 @@ function components() {
             let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
 
             file.contents = Buffer.from(compiled.js.code)
-            file.extname = '.js'
 
             done(null, file)
          })
 
       }))
-      // .pipe(fixSvelteInternalReferences)
       .pipe(dest('dist'))
 }
 
@@ -90,7 +86,7 @@ function develop(done) {
       open: false
       // middleware for http2
    })
-   watch('src/**', build)
+   watch('src/**', rebuild)
 
    done()
 
@@ -105,6 +101,8 @@ let build = parallel(
    internals,
    assets
 )
+
+let rebuild = parallel(js, components)
 
 // dev is a task that runs a build, starts a browser-sync server, and watches src/**
 // also 
