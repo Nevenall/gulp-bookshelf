@@ -1,0 +1,53 @@
+// global css
+
+
+:root {
+
+   --spacing-header: 4.5rem;
+
+
+   --elevation-4: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+   --elevation-12: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 12px 17px 2px rgba(0, 0, 0, .14), 0 5px 22px 4px rgba(0, 0, 0, .12);
+
+
+
+   --font-size-1: .8rem;
+   --font-size-2: 1rem;
+
+
+
+
+   /* color palette */
+   --color-dark: #3a3a3a;
+   --color-light: #eee;
+
+   --primary-text-color: black;
+
+
+
+   /* functional color assignments */
+   --color-text: var(--color-dark);
+   --color-background: var(--color-light);
+
+   /* variable used to store user preference */
+   --user-color-pref: 'unset';
+
+   --transition: 0.25s ease-in-out;
+}
+
+body {
+   background-color: var(--color-background);
+   color: var(--color-text);
+   /* add a transition to smooth the experience */
+   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+
+@media (prefers-color-scheme:dark) {
+   :root {
+      /* flip the light and dark variables */
+
+      --color-text: var(--color-light);
+      --color-background: var(--color-dark);
+   }
+}

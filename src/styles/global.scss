@@ -1,0 +1,13 @@
+@import "variables";
+@import "remedy";
+@import "fonts";
+
+
+@import "book.scss";
+@import "typography.scss";
+
+main {
+   width: 35rem;
+   max-width: calc(100% - 4vw);
+   margin: 0 auto;
+}

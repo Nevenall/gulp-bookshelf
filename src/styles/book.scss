@@ -1,0 +1,19 @@
+#page {
+
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+      font-family: 'Abel', sans-serif;
+      font-weight: 400;
+   }
+
+   p,
+   span,
+   div {
+      font-family: 'Raleway', sans-serif;
+      font-feature-settings: "salt"on;
+   }
+}

@@ -1,0 +1,24 @@
+
+html {
+   // optimize
+   text-rendering: optimizeLegibility;
+   font-synthesis: none;
+
+   // set a base fontsize, the rest of the app uses rem.
+   font-size: 12px;
+
+   // base size will vary from 12 to 20 depending on the screen width.
+   @media (min-width: 320px) {
+      font-size: calc(12px + (20 - 12) * ((100vw - 320px) / (1200 - 320)));
+   }
+
+   @media (min-width: 1200px) {
+      font-size: 20px;
+   }
+
+ 
+}
+
+
+
+// base typography hiearchy and styles

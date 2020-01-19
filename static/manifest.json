@@ -3,7 +3,7 @@
 	"theme_color": "#333333",
 	"name": "BookShelf",
 	"short_name": "BookShelf",
-	"display": "minimal-ui",
+	"display": "standalone",
 	"start_url": "/",
 	"icons": [
 		{

@@ -102,7 +102,7 @@ let build = parallel(
    assets
 )
 
-let rebuild = parallel(js, components)
+let rebuild = parallel(html, js, components)
 
 // dev is a task that runs a build, starts a browser-sync server, and watches src/**
 // also 
@@ -116,4 +116,4 @@ let defaultTask = series(
 
 let devTask = series(build, develop)
 
-export { defaultTask as default, devTask as watch }
+export { defaultTask as default, defaultTask as build, devTask as watch }
