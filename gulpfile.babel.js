@@ -89,7 +89,6 @@ function develop(done) {
    watch('src/**', rebuild)
 
    done()
-
 }
 
 // build processes files, 
@@ -102,7 +101,11 @@ let build = parallel(
    assets
 )
 
-let rebuild = parallel(html, js, components)
+let rebuild = parallel(
+   html,
+   js,
+   components
+)
 
 // dev is a task that runs a build, starts a browser-sync server, and watches src/**
 // also 
