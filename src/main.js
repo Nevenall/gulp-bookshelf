@@ -7,7 +7,4 @@ const app = new App({
    }
 })
 
-navigator.serviceWorker.register('./service-worker.js', {})
-   
-
 export default app

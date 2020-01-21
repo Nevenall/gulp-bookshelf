@@ -8,6 +8,11 @@
    <link rel='manifest' href='manifest.json'>
    <link rel='icon' type='image/png' href='favicon.png'>
    <link rel="stylesheet" href="global.css">
+   <script>
+      if ('serviceWorker' in navigator) {
+         navigator.serviceWorker.register('/service-worker.js');
+      }
+   </script>
 </head>
 
 <body>

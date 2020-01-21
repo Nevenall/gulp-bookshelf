@@ -113,3 +113,11 @@ That is amazing.
 The service worker handles the module imports now!
 did a special rebuild task that doesn't include the slow assets task. 
 We can now start building our site!
+
+## 1.20.2020
+
+so, turns out there is nothing we can do about shift refresh. As dictated by the spec, it skips the service worker. the best we can do is detect when we can't resolve one of things, and do a 404 I guess. 
+
+
+If we are doing a single page app, then we'll want to do a manual 404 with whatever routing we need. 
+Which does beg the question about routing. 

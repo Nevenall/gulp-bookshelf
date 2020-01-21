@@ -1,15 +1,14 @@
 
 
-// promptly activate the ServiceWorker.
 self.addEventListener('install', event => {
-   event.waitUntil(self.skipWaiting()) // Activate worker immediately
+   event.waitUntil(self.skipWaiting())
 })
 
 self.addEventListener('activate', event => {
-   event.waitUntil(self.clients.claim()) // Become available to all pages
+   // Grab all pages
+   event.waitUntil(self.clients.claim())
 })
 
-// intercept fetch events.
 self.addEventListener('fetch', event => {
    // check if requested resource is an import.
    console.log(event.request.url)
@@ -35,8 +34,4 @@ self.addEventListener('fetch', event => {
       // console.log('just a regular request')
       event.respondWith(fetch(event.request))
    }
-
-   // todo - if the url is for a .svelte component, respond with that component with js content-type
-   // if the request is for a svelte/internal then hopefully we can resolve to the correct index.mjs
-   //https://serviceworke.rs/strategy-cache-update-and-refresh_service-worker_doc.html
 })

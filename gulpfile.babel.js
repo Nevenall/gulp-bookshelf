@@ -5,6 +5,7 @@ import { init, write } from "gulp-sourcemaps"
 import babel from "gulp-babel"
 import concat from "gulp-concat"
 import gulpif from 'gulp-if'
+import del from 'delete'
 import browserSync from 'browser-sync'
 import { compile, preprocess } from 'svelte/compiler'
 
@@ -28,7 +29,7 @@ let devServer = browserSync.create()
 function clean(done) {
 
    // clean up the dist directory before we start building
-   done()
+   del('dist/**', done)
 }
 
 
@@ -119,4 +120,4 @@ let defaultTask = series(
 
 let devTask = series(build, develop)
 
-export { defaultTask as default, defaultTask as build, devTask as watch }
+export { defaultTask as default, defaultTask as build, devTask as watch, clean as clean }

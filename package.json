@@ -22,6 +22,7 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/register": "^7.8.3",
     "browser-sync": "^2.26.7",
+    "delete": "^1.1.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
