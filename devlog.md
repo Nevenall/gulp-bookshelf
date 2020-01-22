@@ -121,3 +121,7 @@ so, turns out there is nothing we can do about shift refresh. As dictated by the
 
 If we are doing a single page app, then we'll want to do a manual 404 with whatever routing we need. 
 Which does beg the question about routing. 
+
+## 1.21.2020
+
+Alright, get sass integrated for global styles and for svelte styles
