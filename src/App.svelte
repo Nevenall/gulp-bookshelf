@@ -2,7 +2,6 @@
   import AppBar from "./components/AppBar.svelte";
 //   import Drawer from "./components/Drawer.svelte";
 
-  export let name;
 </script>
 
 <style>

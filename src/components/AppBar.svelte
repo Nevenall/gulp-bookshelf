@@ -1,5 +1,62 @@
 <script>
-
+  let collapsed = false;
 </script>
 
-<h1>Top App Bar</h1>
+<style lang="scss">
+  // full width or collapsed to just the drawer and expand buttons
+  // fixed at top with elevation dropshadow
+  // fixed height based on variable.
+  // has it's own margins
+  header {
+    height: var(--spacing-header);
+    width: 100vw;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all var(--transition);
+
+    padding: 0 2rem;
+  }
+
+  header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header {
+    box-shadow: var(--elevation-4);
+    background: var(--color-background);
+  }
+
+  header.collapsed {
+    width: 20rem;
+  }
+
+  .end {
+    display: flex;
+    flex-flow: row nowrap;
+    //  justify-content: flex-start;
+    align-items: center;
+  }
+
+  // top app bar and Drawer have elevation 12.
+
+  // at narrow widths we automatically collapse
+</style>
+
+<svelte:window on:scroll={() => (collapsed = window.scrollY > 5)} />
+<header class:collapsed>
+  <div class="content" />
+  <!-- open drawer button, hamburger with ripple effect, and transform  -->
+  <button>Menu</button>
+  <!-- end aligned - dark/light style toggle button, github button, manual collapse/expand chevron -->
+  <div class="end">
+    <button>Dark/Light</button>
+    <button>Github</button>
+    <button>collapse/expand</button>
+  </div>
+</header>

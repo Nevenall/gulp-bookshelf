@@ -125,3 +125,22 @@ Which does beg the question about routing.
 ## 1.21.2020
 
 Alright, get sass integrated for global styles and for svelte styles
+
+
+## 1.23.2020
+
+setting up the style task to run sass and postcss, will want to do sourcemaps some day
+https://github.com/postcss/postcss#gulp
+may also want to use https://preset-env.cssdb.org/ at some point 
+
+We could do assets by extension, which would allow up to place assets through out the src, close to where they are used, and then organize them when we copy. 
+
+So, will that work for imports? 
+
+if we import ./ relatively then we'll be expecting that asset to be in the same dir which we can do, if we make the dist pretty flat. But also, we could run into name collisions that way. 
+though, for this proj we won't have that many assets. The bulk of them will probably end up being book assets that we can place in their own dir. 
+
+I wonder if we can find a way to get gulp to build only what changed? 
+Like, I bet we can send through just the watched files right? 
+Ah! What want is a special watch for each type of file that will run only that pipeline!
+That will make it all so much faster. 

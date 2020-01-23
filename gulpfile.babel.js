@@ -6,8 +6,14 @@ import babel from "gulp-babel"
 import concat from "gulp-concat"
 import gulpif from 'gulp-if'
 import del from 'delete'
-import browserSync from 'browser-sync'
+
 import { compile, preprocess } from 'svelte/compiler'
+import sass from 'node-sass'
+import postcss from 'gulp-postcss'
+import autoprefixer from 'autoprefixer'
+import gulpSass from 'gulp-sass'
+
+import browserSync from 'browser-sync'
 
 
 // task("default", function () {
@@ -27,7 +33,6 @@ let svelteOptions = {
 let devServer = browserSync.create()
 
 function clean(done) {
-
    // clean up the dist directory before we start building
    del('dist/**', done)
 }
@@ -40,9 +45,16 @@ function html() {
 
 function js() {
    return src('src/**/*.js')
-      // .pipe(fixComponentImports)
       .pipe(dest('dist'))
 }
+
+function styles() {
+   return src('src/styles/global.scss')
+      .pipe(gulpSass().on('error', gulpSass.logError))
+      .pipe(postcss([require('autoprefixer')]))
+      .pipe(dest('dist'))
+}
+
 
 
 function components() {
@@ -87,30 +99,27 @@ function develop(done) {
       open: false
       // middleware for http2
    })
-   watch('src/**', rebuild)
 
+   // watch each type of file seperately so we can more efficently run just that pipeline 
+   watch('static/**', assets)
+   watch('src/**/*.svelte', components)
+   watch('src/index.html', html)
+   watch('src/**/*.js', js)
+   watch('styles/**', styles)
+   
    done()
 }
 
 // build processes files, 
 // currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
 let build = parallel(
-   html,
-   js,
+   assets,
    components,
-   internals,
-   assets
-)
-
-let rebuild = parallel(
    html,
+   internals,
    js,
-   components
+   styles,
 )
-
-// dev is a task that runs a build, starts a browser-sync server, and watches src/**
-// also 
-
 
 // default task is to clean and run build
 let defaultTask = series(
@@ -120,4 +129,10 @@ let defaultTask = series(
 
 let devTask = series(build, develop)
 
-export { defaultTask as default, defaultTask as build, devTask as watch, clean as clean }
+export {
+   defaultTask as default,
+   defaultTask as build,
+   devTask as watch,
+   clean as clean,
+   styles as styles
+}
