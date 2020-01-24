@@ -3,10 +3,6 @@
 </script>
 
 <style lang="scss">
-  // full width or collapsed to just the drawer and expand buttons
-  // fixed at top with elevation dropshadow
-  // fixed height based on variable.
-  // has it's own margins
   header {
     height: var(--header-spacing);
     width: 100vw;
