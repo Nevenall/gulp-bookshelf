@@ -60,7 +60,10 @@ function styles() {
 
 
 function components() {
-
+   // make this not a sync render? 
+   // does it matter that much? we can 
+   // probably not, but we can move this into the task, and use the callback verison, 
+   // then we can call the done()
    let preop = {
       style: ({ content, attributes, filename }) => {
          if (attributes.lang !== 'scss') return
