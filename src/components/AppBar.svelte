@@ -8,7 +8,7 @@
   // fixed height based on variable.
   // has it's own margins
   header {
-    height: var(--spacing-header);
+    height: var(--header-spacing);
     width: 100vw;
     margin: 0;
     position: fixed;
@@ -57,6 +57,6 @@
   <div class="end">
     <button>Dark/Light</button>
     <button>Github</button>
-    <button>collapse/expand</button>
+    <button>collapse/expand ></button>
   </div>
 </header>

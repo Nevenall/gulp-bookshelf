@@ -1,11 +1,12 @@
 import { series, parallel, src, dest, watch } from "gulp"
-import through2 from 'through2'
+import through from 'through2'
 import replace from 'gulp-replace'
 import { init, write } from "gulp-sourcemaps"
 import babel from "gulp-babel"
 import concat from "gulp-concat"
 import gulpif from 'gulp-if'
 import del from 'delete'
+import { dirname } from 'path'
 
 import { compile, preprocess } from 'svelte/compiler'
 import sass from 'node-sass'
@@ -29,6 +30,7 @@ import browserSync from 'browser-sync'
 let svelteOptions = {
    sveltePath: './svelte'
 }
+
 
 let devServer = browserSync.create()
 
@@ -58,12 +60,33 @@ function styles() {
 
 
 function components() {
-   return src("src/**/*.svelte")
-      .pipe(through2.obj(function (file, encoding, done) {
 
-         let content = file.contents.toString()
+   let preop = {
+      style: ({ content, attributes, filename }) => {
+         if (attributes.lang !== 'scss') return
+
+         const { css, stats } = sass.renderSync({
+            file: filename,
+            data: content,
+            includePaths: ['src/styles'],
+         })
+
+         return {
+            code: css.toString(),
+            dependencies: stats.includedFiles
+         }
+      }
+   }
+
+   return src("src/**/*.svelte")
+      .pipe(through.obj(function (file, encoding, done) {
+
+         let source = file.contents.toString()
+
          // preprocess specially for sass
-         preprocess(content, {}).then(preprocessed => {
+         preprocess(source, preop).then(preprocessed => {
+
+
             // compile svelte components
             let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
 
@@ -106,7 +129,7 @@ function develop(done) {
    watch('src/index.html', html)
    watch('src/**/*.js', js)
    watch('styles/**', styles)
-   
+
    done()
 }
 
@@ -134,5 +157,6 @@ export {
    defaultTask as build,
    devTask as watch,
    clean as clean,
-   styles as styles
+   styles as styles,
+   components as components
 }
