@@ -34,6 +34,7 @@
     "node-sass": "^4.13.1",
     "postcss": "^7.0.26",
     "svelte": "^3.17.3",
+    "svelte-preprocess": "^3.3.0",
     "through2": "^3.0.1"
   },
   "dependencies": {

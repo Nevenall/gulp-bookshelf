@@ -3,6 +3,7 @@
 </script>
 
 <style lang="scss">
+  // this is just a comment dude
   header {
     height: var(--header-spacing);
     width: 100vw;
