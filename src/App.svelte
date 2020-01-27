@@ -1,28 +1,17 @@
 <script>
-  import AppBar from "./components/AppBar.svelte";
-//   import Drawer from "./components/Drawer.svelte";
-
+  import Header from "./components/Header.svelte";
+  import Drawer from "./components/Drawer.svelte";
+  // header has an event for clicking the menu button
+  // which we can use to tell the drawer to toggle.
 </script>
 
 <style>
   main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
+    margin-top: calc(var(--header-spacing) + 2rem);
   }
 </style>
 
-<AppBar />
-<main>page content</main>
+<Header />
+<main>
+  <h1>Big Header & Stuff</h1>
+</main>

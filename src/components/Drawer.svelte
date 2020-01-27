@@ -1,3 +1,9 @@
-<nav title="nav drawer">
+<script>
+  export const show = false;
+</script>
 
-</nav>
+<style lang="scss">
+
+</style>
+
+<nav title="nav drawer" />

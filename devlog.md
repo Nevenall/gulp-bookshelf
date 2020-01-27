@@ -144,3 +144,20 @@ I wonder if we can find a way to get gulp to build only what changed?
 Like, I bet we can send through just the watched files right? 
 Ah! What want is a special watch for each type of file that will run only that pipeline!
 That will make it all so much faster. 
+
+## 1.25.2020
+
+we now have a real site ready for stuff. 
+
+## 1.26.2020
+
+definately need to add error handling to the components task so errors in parsing don't crash the server. 
+
+Ok, we want inline svg so we can style and color it, cool thing is, we can compile it as a component. 
+
+SO, we can create components for the svg icons and have an icon component that can pick them by name. 
+
+the svelte docs site has a component with symbols, referenced by id. that's a pretty cool idea. 
+
+icon, we could use a module script to fetch all the icon svg and then reference it. 
+

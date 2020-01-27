@@ -1,4 +1,5 @@
 <script>
+  import Icon from "./Icon.svelte";
   let collapsed = false;
 </script>
 
@@ -26,11 +27,12 @@
 
   header {
     box-shadow: var(--elevation-4);
-    background: var(--color-background);
+    background: var(--primary-theme-color);
   }
 
   header.collapsed {
     width: 20rem;
+    box-shadow: var(--elevation-8);
   }
 
   .end {
@@ -47,13 +49,16 @@
 
 <svelte:window on:scroll={() => (collapsed = window.scrollY > 5)} />
 <header class:collapsed>
-  <div class="content" />
   <!-- open drawer button, hamburger with ripple effect, and transform  -->
   <button>Menu</button>
   <!-- end aligned - dark/light style toggle button, github button, manual collapse/expand chevron -->
   <div class="end">
-    <button>Dark/Light</button>
-    <button>Github</button>
-    <button>collapse/expand ></button>
+    {#if !collapsed}
+      <button>Dark/Light</button>
+      <button>
+        <Icon src={"src/assets/icons/github.svg"} />
+      </button>
+    {/if}
+    <button on:click={() => (collapsed = !collapsed)}>collapse/expand</button>
   </div>
 </header>

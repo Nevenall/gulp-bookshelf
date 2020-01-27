@@ -64,40 +64,38 @@ function components() {
    // does it matter that much? we can 
    // probably not, but we can move this into the task, and use the callback verison, 
    // then we can call the done()
-   let preop = {
-      style: ({ content, attributes, filename }) => {
-         if (attributes.lang !== 'scss') return
-
-         const { css, stats } = sass.renderSync({
-            file: filename,
-            data: content,
-            includePaths: ['src/styles'],
-         })
-
-         return {
-            code: css.toString(),
-            dependencies: stats.includedFiles
-         }
-      }
-   }
 
    return src("src/**/*.svelte")
       .pipe(through.obj(function (file, encoding, done) {
 
          let source = file.contents.toString()
 
-         // preprocess specially for sass
-         preprocess(source, preop).then(preprocessed => {
+         preprocess(source, {
+            style: ({ content, attributes, filename }) => {
+               if (attributes.lang !== 'scss') return
 
+               const { css, stats } = sass.renderSync({
+                  file: filename,
+                  data: content,
+                  includePaths: ['src/styles'],
+               })
 
-            // compile svelte components
-            let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
-
-            file.contents = Buffer.from(compiled.js.code)
-
-            done(null, file)
+               return {
+                  code: css.toString(),
+                  dependencies: stats.includedFiles
+               }
+            }
          })
-
+            .then(preprocessed => {
+               try {
+                  let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
+                  file.contents = Buffer.from(compiled.js.code)
+                  done(null, file)
+               } catch (error) {
+                  done(error, null)
+               }
+            })
+            .catch(error => done(error, null))
       }))
       .pipe(dest('dist'))
 }
