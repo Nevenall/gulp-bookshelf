@@ -161,3 +161,9 @@ the svelte docs site has a component with symbols, referenced by id. that's a pr
 
 icon, we could use a module script to fetch all the icon svg and then reference it. 
 
+## 1.27.2020
+
+that sounds like such a good idea, but the <use> element clones the svg <symbol> into a dang shadowDOM, which negates the entire point of using inline svg, for me. It's still stylable, but not easily. So, honestly the savings of non-duplication is not worth it for me. 
+
+We'll make an icons folder that's a sibling of static and create a task for them to compile them as svelte components. 
+
