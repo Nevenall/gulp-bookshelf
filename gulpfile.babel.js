@@ -31,14 +31,12 @@ let svelteOptions = {
    sveltePath: './svelte'
 }
 
-
 let devServer = browserSync.create()
 
 function clean(done) {
    // clean up the dist directory before we start building
    del('dist/**', done)
 }
-
 
 function html() {
    return src('src/index.html')
@@ -57,14 +55,7 @@ function styles() {
       .pipe(dest('dist'))
 }
 
-
-
 function components() {
-   // make this not a sync render? 
-   // does it matter that much? we can 
-   // probably not, but we can move this into the task, and use the callback verison, 
-   // then we can call the done()
-
    return src("src/**/*.svelte")
       .pipe(through.obj(function (file, encoding, done) {
 
@@ -100,19 +91,16 @@ function components() {
       .pipe(dest('dist'))
 }
 
-
 function internals() {
    return src('node_modules/svelte/internal/index.mjs')
       .pipe(dest('dist/svelte/internal'))
 }
-
 
 function assets() {
    // copy static files
    return src('static/**')
       .pipe(dest('dist'))
 }
-
 
 function develop(done) {
    devServer.init({
@@ -134,6 +122,24 @@ function develop(done) {
    done()
 }
 
+function icons() {
+   return src('icons/**/*.svg')
+      .pipe(through.obj(function (file, enc, done) {
+         let source = file.contents.toString()
+
+         try {
+            let compiled = compile(source, { filename: file.path, ...svelteOptions })
+            file.contents = Buffer.from(compiled.js.code)
+            file.extname = ".svelte"
+            done(null, file)
+         } catch (error) {
+            done(error, null)
+         }
+
+      }))
+      .pipe(dest('dist/icons'))
+}
+
 // build processes files, 
 // currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
 let build = parallel(
@@ -143,6 +149,7 @@ let build = parallel(
    internals,
    js,
    styles,
+   icons
 )
 
 // default task is to clean and run build

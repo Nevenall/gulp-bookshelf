@@ -1,5 +1,7 @@
 <script>
-  import Icon from "./Icon.svelte";
+  import GitHub from "/icons/GitHub.svelte";
+  import ChevronRight from "/icons/chevron-right.svelte";
+  import ChevronLeft from "/icons/chevron-left.svelte";
   let collapsed = false;
 </script>
 
@@ -42,7 +44,10 @@
     align-items: center;
   }
 
-  // top app bar and Drawer have elevation 12.
+  .icon {
+    height: 2rem;
+    width: auto;
+  }
 
   // at narrow widths we automatically collapse
 </style>
@@ -56,9 +61,11 @@
     {#if !collapsed}
       <button>Dark/Light</button>
       <button>
-        <Icon src={"src/assets/icons/github.svg"} />
+        <GitHub class="icon" />
       </button>
     {/if}
-    <button on:click={() => (collapsed = !collapsed)}>collapse/expand</button>
+    <button on:click={() => (collapsed = !collapsed)}>
+      <ChevronRight class="icon" />
+    </button>
   </div>
 </header>
