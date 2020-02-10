@@ -45,8 +45,39 @@
   }
 
   .icon {
-    height: 2rem;
+    height: 3rem;
     width: auto;
+    color: black;
+  }
+
+  button {
+     background: transparent;
+     border: none;
+
+     height: 3rem;
+     width: 3rem;
+
+     display: flex;
+     justify-content: center;
+     align-content: center;
+
+     border-radius: 50vh;
+
+     
+
+     outline: none;
+     cursor: pointer;
+
+     svg {
+        height: 3rem;
+        width:3rem;
+        fill:black;
+     }
+
+  }
+
+  button:hover {
+     background: blanchedalmond;
   }
 
   // at narrow widths we automatically collapse
@@ -59,7 +90,7 @@
   <!-- end aligned - dark/light style toggle button, github button, manual collapse/expand chevron -->
   <div class="end">
     {#if !collapsed}
-      <button>Dark/Light</button>
+      <button>D/L</button>
       <button>
         <GitHub class="icon" />
       </button>
