@@ -16,6 +16,7 @@
    --font-size-2: 1rem;
 
    
+   // --primary-theme-color: #007db3;
    --primary-theme-color: #ff6600;
    --secondary-theme-color: #007db3;
     
@@ -47,7 +48,6 @@ body {
 @media (prefers-color-scheme:dark) {
    :root {
       /* flip the light and dark variables */
-
       --color-text: var(--color-light);
       --color-background: var(--color-dark);
    }

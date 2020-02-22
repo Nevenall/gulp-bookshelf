@@ -117,7 +117,7 @@ function develop(done) {
    watch('src/**/*.svelte', components)
    watch('src/index.html', html)
    watch('src/**/*.js', js)
-   watch('styles/**', styles)
+   watch('src/styles/**', styles)
    watch('icons/**/*.svg', icons)
 
    done()

@@ -6,7 +6,6 @@
 </script>
 
 <style lang="scss">
-  // this is just a comment dude
   header {
     height: var(--header-spacing);
     width: 100vw;
@@ -44,11 +43,7 @@
     align-items: center;
   }
 
-  .icon {
-    height: 3rem;
-    width: auto;
-    color: black;
-  }
+ 
 
   button {
      background: transparent;
@@ -63,17 +58,10 @@
 
      border-radius: 50vh;
 
-     
-
      outline: none;
      cursor: pointer;
 
-     svg {
-        height: 3rem;
-        width:3rem;
-        fill:black;
-     }
-
+   
   }
 
   button:hover {
