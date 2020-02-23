@@ -1,8 +1,8 @@
 <script>
-  import GitHub from "/icons/GitHub.svelte";
-  import ChevronRight from "/icons/chevron-right.svelte";
-  import ChevronLeft from "/icons/chevron-left.svelte";
-  import DarkMode from "/icons/dark-mode.svelte";
+  import GitHub from "/icons/GitHub.svg";
+  import ChevronRight from "/icons/chevron-right.svg";
+  import ChevronLeft from "/icons/chevron-left.svg";
+  import DarkMode from "/icons/dark-mode.svg";
   let collapsed = false;
 </script>
 
@@ -26,7 +26,7 @@
   }
 
   header {
-    transition: all var(--transition);
+    transition: width var(--transition);
     box-shadow: var(--elevation-4);
     background: var(--primary-theme-color);
   }

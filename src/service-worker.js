@@ -23,6 +23,12 @@ self.addEventListener('fetch', event => {
       event.respondWith(fetch('/svelte/internal/index.mjs').then(response => {
          return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
       }))
+   } else if (event.request.url.endsWith('.svg')) {
+      event.respondWith(fetch(event.request).then(response => {
+         // return .svg components with correct content type
+         return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
+      }))
+
    }
    else {
       event.respondWith(fetch(event.request))

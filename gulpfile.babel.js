@@ -132,7 +132,7 @@ function icons() {
          try {
             let compiled = compile(source, { filename: file.path, ...svelteOptions })
             file.contents = Buffer.from(compiled.js.code)
-            file.extname = ".svelte"
+            // file.extname = ".svg"
             done(null, file)
          } catch (error) {
             done(error, null)
