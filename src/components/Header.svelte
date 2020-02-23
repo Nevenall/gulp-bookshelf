@@ -41,23 +41,30 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    * {
+      margin-right: 1rem;
+    }
+    *:last-child {
+      margin-right: 0;
+    }
   }
 
-  button {
+  button,a {
     background: transparent;
     border: none;
 
-    height: 3rem;
-    width: 3rem;
+    height: 2rem;
+    width: 2rem;
 
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 
     border-radius: 50vh;
 
     outline: none;
     cursor: pointer;
+    transition: background var(--transition);
   }
 
   :global(svg) {
@@ -65,8 +72,8 @@
     width: auto;
   }
 
-  button:hover {
-    //  background: blanchedalmond;
+  a:hover, button:hover {
+   background: var(--primary-hover-color);
   }
 
   // at narrow widths we automatically collapse
@@ -76,13 +83,12 @@
 <header class:collapsed>
   <!-- open drawer button, hamburger with ripple effect, and transform  -->
   <button>Menu</button>
-  <!-- end aligned - dark/light style toggle button, github button, manual collapse/expand chevron -->
   <div class="end">
     {#if !collapsed}
-      <button>
+      <button class="ripple" title="toggle dark/light modes">
         <DarkMode />
       </button>
-      <a target="_blank" href="https://github.com/Nevenall/gulp-bookshelf">
+      <a target="_blank" href="https://github.com/Nevenall/gulp-bookshelf" title="visit the github repository">
         <GitHub />
       </a>
     {/if}

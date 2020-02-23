@@ -108,7 +108,8 @@ function develop(done) {
       single: true,
       port: 8080,
       files: ['dist/**'],
-      open: false
+      open: false,
+      notify: false,
       // middleware for http2
    })
 
