@@ -167,3 +167,11 @@ that sounds like such a good idea, but the <use> element clones the svg <symbol>
 
 We'll make an icons folder that's a sibling of static and create a task for them to compile them as svelte components. 
 
+## 2.23.2020
+
+got lots of stuff working. 
+thinking about parameterizing meta theme color, have gulp do a replace
+
+header is doing pretty good. maybe time to clean up the color theming and implement the dark/light mode toggle. 
+
+then we can do the slide out drawer. 
