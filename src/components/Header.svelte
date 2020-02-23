@@ -2,6 +2,7 @@
   import GitHub from "/icons/GitHub.svelte";
   import ChevronRight from "/icons/chevron-right.svelte";
   import ChevronLeft from "/icons/chevron-left.svelte";
+  import DarkMode from "/icons/dark-mode.svelte";
   let collapsed = false;
 </script>
 
@@ -14,9 +15,7 @@
     top: 0;
     left: 0;
     right: 0;
-    transition: all var(--transition);
-
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   header {
@@ -27,45 +26,47 @@
   }
 
   header {
+    transition: all var(--transition);
     box-shadow: var(--elevation-4);
     background: var(--primary-theme-color);
   }
 
   header.collapsed {
-    width: 20rem;
+    width: 10rem;
     box-shadow: var(--elevation-8);
+    border-bottom-right-radius: calc(var(--header-spacing) / 2);
   }
 
   .end {
     display: flex;
     flex-flow: row nowrap;
-    //  justify-content: flex-start;
     align-items: center;
   }
 
- 
-
   button {
-     background: transparent;
-     border: none;
+    background: transparent;
+    border: none;
 
-     height: 3rem;
-     width: 3rem;
+    height: 3rem;
+    width: 3rem;
 
-     display: flex;
-     justify-content: center;
-     align-content: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
-     border-radius: 50vh;
+    border-radius: 50vh;
 
-     outline: none;
-     cursor: pointer;
+    outline: none;
+    cursor: pointer;
+  }
 
-   
+  :global(svg) {
+    height: 1.5rem;
+    width: auto;
   }
 
   button:hover {
-     background: blanchedalmond;
+    //  background: blanchedalmond;
   }
 
   // at narrow widths we automatically collapse
@@ -78,13 +79,19 @@
   <!-- end aligned - dark/light style toggle button, github button, manual collapse/expand chevron -->
   <div class="end">
     {#if !collapsed}
-      <button>D/L</button>
       <button>
-        <GitHub class="icon" />
+        <DarkMode />
       </button>
+      <a target="_blank" href="https://github.com/Nevenall/gulp-bookshelf">
+        <GitHub />
+      </a>
     {/if}
     <button on:click={() => (collapsed = !collapsed)}>
-      <ChevronRight class="icon" />
+      {#if !collapsed}
+        <ChevronLeft />
+      {:else}
+        <ChevronRight />
+      {/if}
     </button>
   </div>
 </header>
