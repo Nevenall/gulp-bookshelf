@@ -12,13 +12,6 @@ main {
 }
 
 
-:root{}
-
-
-// .icon {
-//    height: 3rem;
-//    width: auto;
-// }
 
 svg {
    height: 100%;
@@ -26,16 +19,14 @@ svg {
 }
 
 
-
-/*Create ripple effec*/
-
+// create ripple effect
 .ripple {
    position: relative;
    overflow: hidden;
    transform: translate3d(0, 0, 0);
- }
- 
- .ripple:after {
+}
+
+.ripple:after {
    content: "";
    display: block;
    position: absolute;
@@ -50,10 +41,10 @@ svg {
    transform: scale(10, 10);
    opacity: 0;
    transition: transform .5s, opacity 1s;
- }
- 
- .ripple:active:after {
+}
+
+.ripple:active:after {
    transform: scale(0, 0);
    opacity: .3;
    transition: 0s;
- }
+}

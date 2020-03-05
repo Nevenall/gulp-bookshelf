@@ -1,11 +1,11 @@
-
 html {
+   // set the base app shell font family
+   font-family: 'Roboto', sans-serif;
+   font-weight: 400;
+
    // optimize
    text-rendering: optimizeLegibility;
    font-synthesis: none;
-
-
-   
 
    // set a base fontsize, the rest of the app uses rem.
    font-size: 12px;
@@ -19,9 +19,11 @@ html {
       font-size: 20px;
    }
 
- 
+
 }
 
-
-
 // base typography hiearchy and styles
+
+// do we do all the fonts/styles here? or is the app shell stuff separate? 
+// define the base app shell styles, then they can be overwritten at lower levels? 
+// 

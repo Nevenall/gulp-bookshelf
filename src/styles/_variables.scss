@@ -5,29 +5,33 @@
 
    --header-spacing: 3rem;
 
-
+   --elevation-2: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
    --elevation-4: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
    --elevation-8: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
    --elevation-12: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 12px 17px 2px rgba(0, 0, 0, .14), 0 5px 22px 4px rgba(0, 0, 0, .12);
+   --elevation-16: 0 8px 10px -5px rgba(0, 0, 0, .2), 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12);
+
 
 
 
    --font-size-1: .8rem;
    --font-size-2: 1rem;
 
-   
+
    // --primary-theme-color: #007db3;
 
-   
+
    --primary-theme-color: #ff6600;
+   // three shades lighter
    --primary-hover-color: #ff893b;
 
    --secondary-theme-color: #007db3;
-    
+
    --primary-text-color: black;
-   
-   
-   
+
+   // default transition style  
+   --transition: 0.25s ease-in-out;
+
    /* color palette */
    --color-dark: #3a3a3a;
    --color-light: #eee;
@@ -38,7 +42,6 @@
    /* variable used to store user preference */
    --user-color-pref: 'unset';
 
-   --transition: 0.25s ease-in-out;
 }
 
 body {

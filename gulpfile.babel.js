@@ -119,25 +119,30 @@ function develop(done) {
    watch('src/index.html', html)
    watch('src/**/*.js', js)
    watch('src/styles/**', styles)
-   watch('icons/**/*.svg', icons)
+   watch('src/icons/**', icons)
 
    done()
 }
 
 function icons() {
-   return src('icons/**/*.svg')
+   return src('icons/**')
       .pipe(through.obj(function (file, enc, done) {
-         let source = file.contents.toString()
+         if (file.extname === '.svg') {
+            let source = file.contents.toString()
 
-         try {
-            let compiled = compile(source, { filename: file.path, ...svelteOptions })
-            file.contents = Buffer.from(compiled.js.code)
-            // file.extname = ".svg"
+            try {
+               let compiled = compile(source, { filename: file.path, ...svelteOptions })
+               file.contents = Buffer.from(compiled.js.code)
+               // file.extname = ".svg"
+               done(null, file)
+            } catch (error) {
+               done(error, null)
+            }
+         } else {
+            // todo - for now copy the js file without svelte compiling. 
+            //someday we might just create it dynamically
             done(null, file)
-         } catch (error) {
-            done(error, null)
          }
-
       }))
       .pipe(dest('dist/icons'))
 }

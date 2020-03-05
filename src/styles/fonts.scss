@@ -1,9 +1,7 @@
 /* Import App Shell fonts+icons */
 /* TODO: may want to add italics typefaces */
 /* TODO: may also remove some of the roboto we don't need */
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 // TODO: will google font imports work for offline? Does parcel catch them?
 // book specific fonts

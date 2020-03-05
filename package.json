@@ -18,9 +18,9 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/register": "^7.8.3",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/register": "^7.8.6",
     "autoprefixer": "^9.7.4",
     "browser-sync": "^2.26.7",
     "delete": "^1.1.0",
@@ -33,7 +33,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "node-sass": "^4.13.1",
     "postcss": "^7.0.27",
-    "svelte": "^3.19.1",
+    "svelte": "^3.19.2",
     "svelte-preprocess": "^3.4.0",
     "through2": "^3.0.1"
   },
