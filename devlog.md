@@ -175,3 +175,12 @@ thinking about parameterizing meta theme color, have gulp do a replace
 header is doing pretty good. maybe time to clean up the color theming and implement the dark/light mode toggle. 
 
 then we can do the slide out drawer. 
+
+## 3.5.2020
+
+app shell styling
+what's the most effective way to do so? 
+maybe have a specific style sheet for the appshell
+if we put it in the app as a global, it would affect page components
+it would be nice to put it in one place
+maybe if the app styles were imported in the compoent itself, that would work, right?

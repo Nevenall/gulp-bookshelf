@@ -31,7 +31,7 @@
   }
 
   header {
-    transition: width var(--transition);
+   // transition: width var(--transition);
     box-shadow: var(--elevation-4);
     background: var(--primary-theme-color);
   }
