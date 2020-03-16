@@ -125,7 +125,7 @@ function develop(done) {
 }
 
 function icons() {
-   return src('icons/**')
+   return src('src/icons/**')
       .pipe(through.obj(function (file, enc, done) {
          if (file.extname === '.svg') {
             let source = file.contents.toString()
@@ -133,7 +133,7 @@ function icons() {
             try {
                let compiled = compile(source, { filename: file.path, ...svelteOptions })
                file.contents = Buffer.from(compiled.js.code)
-               // file.extname = ".svg"
+               file.extname = ".svg"
                done(null, file)
             } catch (error) {
                done(error, null)
