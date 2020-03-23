@@ -19,12 +19,12 @@ html {
       font-size: 20px;
    }
 
-
 }
 
 // base typography hiearchy and styles
 
 // do we do all the fonts/styles here? or is the app shell stuff separate? 
 // define the base app shell styles, then they can be overwritten at lower levels? 
-// 
 
+// todo - the app shell is a uniform roboto. We could have a type hiearchy for the app and one for the book, but 
+// I think it might be better to use the same shell for both. For consistency sake. 
