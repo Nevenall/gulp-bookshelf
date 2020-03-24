@@ -28,3 +28,62 @@ html {
 
 // todo - the app shell is a uniform roboto. We could have a type hiearchy for the app and one for the book, but 
 // I think it might be better to use the same shell for both. For consistency sake. 
+// so, if we define font sizes as theme variables
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   line-height: 1;
+   margin: .5rem 0 .25rem 0;
+}
+
+p,
+span,
+div {
+
+   line-height: 1.25;
+   letter-spacing: 0;
+   word-spacing: 0;
+   margin: 0 0 .25rem 0;
+
+   &:last-child{
+      margin-bottom: 0;
+   }
+
+}
+
+
+h1 {
+   font-size: var(--font-size-h1);
+}
+
+h2 {
+   font-size: var(--font-size-h2);
+}
+
+h3 {
+   font-size: var(--font-size-h3);
+}
+
+h4 {
+   font-size: var(--font-size-h4);
+}
+
+h5 {
+   font-size: var(--font-size-h5);
+}
+
+h6 {
+   font-size: var(--font-size-h6);
+}
+
+
+p,
+span,
+div {
+   font-size: var(--font-size-body);
+}
