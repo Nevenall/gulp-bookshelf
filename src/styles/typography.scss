@@ -38,23 +38,42 @@ h4,
 h5,
 h6 {
    line-height: 1;
-   margin: .5rem 0 .25rem 0;
+   letter-spacing: -0.07rem;
+   margin: 1rem 0 .5rem 0;
 }
 
+
+// all text elements
 p,
-span,
+dd,
+li,
+div,
+span {
+
+   // line-height: 1.25;
+   line-height: 1.25;
+   letter-spacing: 0.03rem;
+   word-spacing: 0;
+}
+
+
+// block text elements
+p,
+dd,
+li,
 div {
 
-   line-height: 1.25;
-   letter-spacing: 0;
-   word-spacing: 0;
    margin: 0 0 .25rem 0;
 
-   &:last-child{
+   &:last-child {
       margin-bottom: 0;
    }
 
 }
+
+
+// inline text elements
+span {}
 
 
 h1 {
