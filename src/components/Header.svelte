@@ -91,7 +91,7 @@
    display: flex;
    align-items: center;
    font-size: var(--font-size-2);
-   font-weight: 700;
+   font-weight: 500;
   }
 </style>
 

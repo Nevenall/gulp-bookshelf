@@ -49,6 +49,7 @@
    /* color palette */
    --color-dark: #3a3a3a;
    --color-light: #eee;
+   
    /* functional color assignments */
    --color-text: var(--color-dark);
    --color-background: var(--color-light);
@@ -62,7 +63,7 @@ body {
    background-color: var(--color-background);
    color: var(--color-text);
    /* add a transition to smooth the experience */
-   transition: background-color 0.25s ease, color 0.25s ease;
+   transition: background-color var(--transition), color var(--transition);
 }
 
 
