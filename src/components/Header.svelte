@@ -83,15 +83,15 @@
     background: var(--primary-hover-color);
   }
 
-  h2 {
+  span {
     margin-left: 2rem;
     margin-right: auto;
     color: black;
 
    display: flex;
    align-items: center;
-
-
+   font-size: var(--font-size-2);
+   font-weight: 700;
   }
 </style>
 
@@ -101,7 +101,7 @@
     <Menu />
   </button>
   {#if !collapsed}
-    <h2>BookShelf <ChevronRight/> Ghosting the Edge</h2>
+    <span>BookShelf <ChevronRight/> Ghosting the Edge</span>
   {/if}
   <div class="end">
     {#if !collapsed}
