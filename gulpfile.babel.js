@@ -76,17 +76,15 @@ function components() {
                   dependencies: stats.includedFiles
                }
             }
-         })
-            .then(preprocessed => {
-               try {
-                  let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
-                  file.contents = Buffer.from(compiled.js.code)
-                  done(null, file)
-               } catch (error) {
-                  done(error, null)
-               }
-            })
-            .catch(error => done(error, null))
+         }).then(preprocessed => {
+            try {
+               let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
+               file.contents = Buffer.from(compiled.js.code)
+               done(null, file)
+            } catch (error) {
+               done(error, null)
+            }
+         }).catch(error => done(error, null))
       }))
       .pipe(dest('dist'))
 }

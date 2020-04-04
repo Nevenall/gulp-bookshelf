@@ -184,3 +184,11 @@ maybe have a specific style sheet for the appshell
 if we put it in the app as a global, it would affect page components
 it would be nice to put it in one place
 maybe if the app styles were imported in the compoent itself, that would work, right?
+
+
+## 4.4.2020
+ 
+separate the app colors and the page colors
+here's an accessible way to hide the focus outline for buttons https://jmperezperez.com/outline-focus-ring-a11y/
+
+

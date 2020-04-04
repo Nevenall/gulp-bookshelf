@@ -5,6 +5,33 @@
 
 @import "book.scss";
 
+
+
+// dark/light modes
+body {
+   background-color: var(--color-background);
+   color: var(--color-text);
+   transition: background-color var(--transition), color var(--transition);
+}
+
+@media (prefers-color-scheme:dark) {
+   :root {
+      --color-text: var(--color-light);
+      --color-background: var(--color-dark);
+   }
+
+   .dark {
+      --color-text: var(--color-light);
+      --color-background: var(--color-dark);
+   }
+
+   .light {
+      --color-text: var(--color-dark);
+      --color-background: var(--color-light);
+   }
+
+}
+
 main {
    width: 35rem;
    max-width: calc(100% - 4vw);

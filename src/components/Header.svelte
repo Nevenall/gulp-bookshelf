@@ -7,6 +7,8 @@
     Menu
   } from "/icons/index.js";
 
+  let title = "Ghosting the Edge";
+
   let collapsed = false;
   let open = false;
 </script>
@@ -31,9 +33,9 @@
   }
 
   header {
-   // transition: width var(--transition);
+    // transition: width var(--transition);
     box-shadow: var(--elevation-4);
-    background: var(--primary-theme-color);
+    background: var(--app-color-primary);
   }
 
   header.collapsed {
@@ -76,36 +78,49 @@
   :global(svg) {
     height: 1.5rem;
     width: auto;
+    fill: var(--app-color-text);
   }
 
   a:hover,
   button:hover {
-    background: var(--primary-hover-color);
+    background: var(--app-color-hover);
   }
 
   span {
     margin-left: 2rem;
     margin-right: auto;
-    color: black;
+    color: var(--app-color-text);
 
-   display: flex;
-   align-items: center;
-   font-size: var(--font-size-2);
-   font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-2);
+    font-weight: 500;
   }
 </style>
 
 <svelte:window on:scroll={() => (collapsed = window.scrollY > 5)} />
+
 <header class:collapsed>
-  <button class="ripple" type="button" class:is-active={open} on:click={() => (open = !open)}>
+  <button
+    class="ripple"
+    type="button"
+    class:is-active={open}
+    on:click={() => (open = !open)}>
     <Menu />
   </button>
   {#if !collapsed}
-    <span>BookShelf <ChevronRight/> Ghosting the Edge</span>
+    <span>
+      BookShelf
+      <ChevronRight />
+      {title}
+    </span>
   {/if}
   <div class="end">
     {#if !collapsed}
-      <button class="ripple" title="toggle dark/light modes">
+      <button
+        class="ripple"
+        title="toggle dark/light modes"
+        on:click={() => document.documentElement.classList.add('light')}>
         <DarkMode />
       </button>
       <a
