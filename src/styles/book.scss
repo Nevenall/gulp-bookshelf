@@ -16,6 +16,8 @@
    span,
    div {
       font-family: 'Raleway', sans-serif;
+      // turn on the stylistic alternates. In general they are straighter forms. 
+      // This provides more contrast with Abel. 
       font-feature-settings: "salt"on;
    }
 }

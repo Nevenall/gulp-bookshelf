@@ -33,7 +33,8 @@
   }
 
   header {
-    // transition: width var(--transition);
+    // note - there are performance implications in transitioning width
+    transition: width var(--transition-fast);
     box-shadow: var(--elevation-4);
     background: var(--app-color-primary);
   }
