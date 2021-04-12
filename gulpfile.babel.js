@@ -9,7 +9,7 @@ import del from 'delete'
 import { dirname } from 'path'
 
 import { compile, preprocess } from 'svelte/compiler'
-import sass from 'node-sass'
+import sass from 'sass'
 import postcss from 'gulp-postcss'
 import autoprefixer from 'autoprefixer'
 import gulpSass from 'gulp-sass'
