@@ -192,3 +192,6 @@ separate the app colors and the page colors
 here's an accessible way to hide the focus outline for buttons https://jmperezperez.com/outline-focus-ring-a11y/
 
 
+## 6.11.2021, danb
+
+Be a while, but I was trying out snowpack and I find myself liking this better. Snowpack doesn't really support inline svg fragments or anything. I suppose there could be a plugin for it, but I'm not 
