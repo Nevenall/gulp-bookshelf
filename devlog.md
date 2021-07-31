@@ -180,10 +180,10 @@ then we can do the slide out drawer.
 
 app shell styling
 what's the most effective way to do so? 
-maybe have a specific style sheet for the appshell
+maybe have a specific style sheet for the app shell
 if we put it in the app as a global, it would affect page components
 it would be nice to put it in one place
-maybe if the app styles were imported in the compoent itself, that would work, right?
+maybe if the app styles were imported in the component itself, that would work, right?
 
 
 ## 4.4.2020
@@ -194,4 +194,9 @@ here's an accessible way to hide the focus outline for buttons https://jmperezpe
 
 ## 6.11.2021, danb
 
-Be a while, but I was trying out snowpack and I find myself liking this better. Snowpack doesn't really support inline svg fragments or anything. I suppose there could be a plugin for it, but I'm not 
+Be a while, but I was trying out snowpack and I find myself liking this better. Snowpack doesn't really support inline svg fragments or anything. I suppose there could be a plugin for it.
+
+## 6.18.2021, danb
+
+Got the pages going pretty well in snowpack, but it doesn't really do the internal relative links very well. I would have to do some kind of fix up for each link in the page, which I don't want to do. 
+
