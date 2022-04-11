@@ -9,10 +9,14 @@ import del from 'delete'
 import { dirname } from 'path'
 
 import { compile, preprocess } from 'svelte/compiler'
-import sass from 'sass'
+
+import sassCompiler from 'sass'
 import postcss from 'gulp-postcss'
 import autoprefixer from 'autoprefixer'
+
 import gulpSass from 'gulp-sass'
+
+const sass = gulpSass(sassCompiler)
 
 import browserSync from 'browser-sync'
 
@@ -65,7 +69,7 @@ function components() {
             style: ({ content, attributes, filename }) => {
                if (attributes.lang !== 'scss') return
 
-               const { css, stats } = sass.renderSync({
+               const { css, stats } = sassCompiler.renderSync({
                   file: filename,
                   data: content,
                   includePaths: ['src/styles'],

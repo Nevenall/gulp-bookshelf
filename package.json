@@ -30,7 +30,7 @@
     "gulp-if": "^3.0.0",
     "gulp-postcss": "^9.0.0",
     "gulp-replace": "^1.0.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.0.0",  
     "gulp-sourcemaps": "^3.0.0",
     "postcss": "^8.1.0",
     "sass": "^1.32.8",
