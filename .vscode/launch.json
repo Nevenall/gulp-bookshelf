@@ -5,14 +5,34 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "args": [
+        "--trace-warnings",
+        "--experimental-modules",
+        "build"
+      ],
+      "name": "Gulp",
+      "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
       "request": "launch",
-      "name": "Run Gulp Build",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
-      "args": ["components"]
+      "type": "node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Harness",
+      "program": "${workspaceFolder}/harness.mjs",
+      "args": [
+        "--trace-warnings",
+        "--experimental-modules"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "App",
+      "program": "${workspaceFolder}/app.js"
     }
   ]
 }

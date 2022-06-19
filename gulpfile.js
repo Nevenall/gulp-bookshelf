@@ -1,7 +1,12 @@
-import { series, parallel, src, dest, watch } from "gulp"
+import gulp from 'gulp'
+let { parallel, series, src, dest } = gulp
+
 import through from 'through2'
 import replace from 'gulp-replace'
-import { init, write } from "gulp-sourcemaps"
+
+import sourcemaps from 'gulp-sourcemaps'
+let { init, write } = sourcemaps
+
 import babel from "gulp-babel"
 import concat from "gulp-concat"
 import gulpif from 'gulp-if'
@@ -104,7 +109,7 @@ function assets() {
       .pipe(dest('dist'))
 }
 
-function develop(done) {
+function watch(done) {
    devServer.init({
       server: './dist',
       single: true,
@@ -151,7 +156,7 @@ function icons() {
 
 // build processes files, 
 // currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
-let build = parallel(
+let compileBookShelf = parallel(
    assets,
    components,
    html,
@@ -162,17 +167,17 @@ let build = parallel(
 )
 
 // default task is to clean and run build
-let defaultTask = series(
+let build = series(
    clean,
-   build
+   compileBookShelf
 )
 
-let devTask = series(build, develop)
+let develop = series(compileBookShelf, watch)
 
 export {
-   defaultTask as default,
-   defaultTask as build,
-   devTask as watch,
+   build as default,
+   build as build,
+   develop as develop,
    clean as clean,
    styles as styles,
    components as components
