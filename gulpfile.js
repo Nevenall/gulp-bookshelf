@@ -7,7 +7,6 @@ import replace from 'gulp-replace'
 import sourcemaps from 'gulp-sourcemaps'
 let { init, write } = sourcemaps
 
-import babel from "gulp-babel"
 import concat from "gulp-concat"
 import gulpif from 'gulp-if'
 import del from 'delete'
@@ -15,25 +14,8 @@ import { dirname } from 'path'
 
 import { compile, preprocess } from 'svelte/compiler'
 
-import sassCompiler from 'sass'
 import postcss from 'gulp-postcss'
-import autoprefixer from 'autoprefixer'
-
-import gulpSass from 'gulp-sass'
-
-const sass = gulpSass(sassCompiler)
-
 import browserSync from 'browser-sync'
-
-
-// task("default", function () {
-//    return src("src/**/*.js")
-//       .pipe(init())
-//       .pipe(babel())
-//       .pipe(concat("all.js"))
-//       .pipe(write("."))
-//       .pipe(dest("dist"))
-// })
 
 
 let svelteOptions = {
@@ -58,9 +40,11 @@ function js() {
 }
 
 function styles() {
-   return src('src/styles/global.scss')
-      .pipe(gulpSass().on('error', gulpSass.logError))
-      .pipe(postcss([require('autoprefixer')]))
+   return src('src/styles/global.css')
+      .pipe(sourcemaps.init())
+      // plugins configured in ./postcss.config.cjs
+      .pipe(postcss())
+      .pipe(sourcemaps.write('.'))
       .pipe(dest('dist'))
 }
 

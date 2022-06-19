@@ -2,7 +2,7 @@
   export const show = false;
 </script>
 
-<style lang="scss">
+<style >
 
 </style>
 

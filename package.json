@@ -6,30 +6,34 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
-    "dev": "gulp watch",
-    "start": "serve dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "$env:NODE_ENV='development' && gulp develop",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "$env:NODE_ENV='production' && gulp build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nevenall",
   "license": "ISC",
- 
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
+    "autoprefixer": "^10.4.7",
     "browser-sync": "^2.26.12",
     "delete": "^1.1.0",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^3.0.0",
     "gulp-postcss": "^9.0.0",
     "gulp-replace": "^1.0.0",
-    "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "postcss": "^8.1.0",
-    "sass": "^1.32.8",
+    "postcss": "^8.4.14",
+    "postcss-import": "^14.1.0",
+    "postcss-load-config": "^4.0.1",
+    "postcss-nested": "^5.0.6",
+    "postcss-strip-inline-comments": "^0.1.5",
     "svelte": "^3.28.0",
     "svelte-preprocess": "^4.3.2",
     "through2": "^4.0.2"
+  },
+  "dependencies": {
+    "cssnano": "^5.1.12",
+    "postcss-scss": "^4.0.4"
   }
 }

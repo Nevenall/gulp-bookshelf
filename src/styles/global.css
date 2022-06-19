@@ -1,11 +1,8 @@
-@import "variables";
-@import "remedy.scss";
-@import "fonts.scss";
-@import "typography.scss";
-
-@import "book.scss";
-
-
+@import "variables.css";
+@import "remedy.css";
+@import "fonts.css";
+@import "typography.css";
+@import "book.css";
 
 // dark/light modes
 body {

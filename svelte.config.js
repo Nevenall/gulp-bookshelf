@@ -1,8 +1,10 @@
-const sveltePreprocess = require('svelte-preprocess')
+import sveltePreprocess from 'svelte-preprocess'
 
 // this file is for the vscode svelte lang server
-module.exports = {
+let config = {
    preprocess: sveltePreprocess({
-      scss: true
+      postcss: true
    })
-};
+}
+
+export default config

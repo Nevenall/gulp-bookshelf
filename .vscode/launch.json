@@ -6,27 +6,20 @@
   "configurations": [
     {
       "args": [
+        "styles",
         "--trace-warnings",
-        "--experimental-modules",
-        "build"
+        "--experimental-modules"
       ],
       "name": "Gulp",
       "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
       "request": "launch",
+      "env": {
+        "NODE_ENV": "production"
+      },
       "skipFiles": [
         "<node_internals>/**"
       ],
       "type": "node"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Harness",
-      "program": "${workspaceFolder}/harness.mjs",
-      "args": [
-        "--trace-warnings",
-        "--experimental-modules"
-      ]
     },
     {
       "type": "node",
