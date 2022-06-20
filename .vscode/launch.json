@@ -5,27 +5,30 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "args": [
         "styles",
         "--trace-warnings",
+        "--trace-uncaught",
         "--experimental-modules"
       ],
       "name": "Gulp",
       "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
       "request": "launch",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "development"
       },
       "skipFiles": [
         "<node_internals>/**"
       ],
       "type": "node"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "App",
-      "program": "${workspaceFolder}/app.js"
     }
+    
   ]
 }

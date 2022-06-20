@@ -30,10 +30,8 @@
     "postcss-strip-inline-comments": "^0.1.5",
     "svelte": "^3.28.0",
     "svelte-preprocess": "^4.3.2",
-    "through2": "^4.0.2"
-  },
-  "dependencies": {
     "cssnano": "^5.1.12",
-    "postcss-scss": "^4.0.4"
+    "postcss-scss": "^4.0.4",
+    "through2": "^4.0.2"
   }
 }

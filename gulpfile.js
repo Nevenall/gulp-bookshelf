@@ -1,11 +1,10 @@
 import gulp from 'gulp'
-let { parallel, series, src, dest } = gulp
+let { parallel, series, src, dest, watch } = gulp
 
 import through from 'through2'
 import replace from 'gulp-replace'
 
 import sourcemaps from 'gulp-sourcemaps'
-let { init, write } = sourcemaps
 
 import concat from "gulp-concat"
 import gulpif from 'gulp-if'
@@ -14,7 +13,11 @@ import { dirname } from 'path'
 
 import { compile, preprocess } from 'svelte/compiler'
 
-import postcss from 'gulp-postcss'
+
+import gulppostcss from 'gulp-postcss'
+import postcss from 'postcss'
+import postcssloadconfig from 'postcss-load-config'
+
 import browserSync from 'browser-sync'
 
 
@@ -39,45 +42,44 @@ function js() {
       .pipe(dest('dist'))
 }
 
-function styles() {
-   return src('src/styles/global.css')
-      .pipe(sourcemaps.init())
+async function styles() {
+   // manually load the postcss config
+   // let config = await postcssloadconfig({ env: process.env || 'development' }, './postcss.config.js')
+   return src('src/styles/**/*.css')
       // plugins configured in ./postcss.config.cjs
-      .pipe(postcss())
-      .pipe(sourcemaps.write('.'))
-      .pipe(dest('dist'))
+      .pipe(gulppostcss())
+      .pipe(dest('dist/styles'))
 }
 
-function components() {
+async function components() {
+   // manually load the postcss config
+   let config = await postcssloadconfig({ env: process.env || 'development' }, './postcss.config.js')
+
    return src("src/**/*.svelte")
       .pipe(through.obj(function (file, encoding, done) {
-
          let source = file.contents.toString()
 
          preprocess(source, {
-            style: ({ content, attributes, filename }) => {
-               if (attributes.lang !== 'scss') return
-
-               const { css, stats } = sassCompiler.renderSync({
-                  file: filename,
-                  data: content,
-                  includePaths: ['src/styles'],
-               })
-
-               return {
-                  code: css.toString(),
-                  dependencies: stats.includedFiles
-               }
+            style: async ({ content, markup, attributes, filename }) => {
+               // only preprocessing postcss <style> elements
+               if (attributes.lang !== 'postcss') return
+               let processed = await postcss(config.plugins).process(content, config.options)
+               return { code: processed.css.toString() }
             }
-         }).then(preprocessed => {
-            try {
-               let compiled = compile(preprocessed.toString(), { filename: file.path, ...svelteOptions })
-               file.contents = Buffer.from(compiled.js.code)
+         })
+            .then(preprocessed => {
+               let compiled = compile(preprocessed.code, { filename: file.path, ...svelteOptions })
+               // default components import internals from "./svelte/internal"
+               // but the service-worker will then provide that file under each component directory
+               // which, i believe, breaks some of the internals of component compiling
+               // therefore, we replace that import path with a static one
+               var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+               file.contents = Buffer.from(content)
                done(null, file)
-            } catch (error) {
-               done(error, null)
-            }
-         }).catch(error => done(error, null))
+            })
+            .catch(err => {
+               done(err, null)
+            })
       }))
       .pipe(dest('dist'))
 }
@@ -93,7 +95,7 @@ function assets() {
       .pipe(dest('dist'))
 }
 
-function watch(done) {
+function dev(done) {
    devServer.init({
       server: './dist',
       single: true,
@@ -116,23 +118,22 @@ function watch(done) {
 }
 
 function icons() {
-   return src('src/icons/**')
+   return src('src/icons/**/*.svg')
       .pipe(through.obj(function (file, enc, done) {
-         if (file.extname === '.svg') {
-            let source = file.contents.toString()
+         let source = file.contents.toString()
 
-            try {
-               let compiled = compile(source, { filename: file.path, ...svelteOptions })
-               file.contents = Buffer.from(compiled.js.code)
-               file.extname = ".svg"
-               done(null, file)
-            } catch (error) {
-               done(error, null)
-            }
-         } else {
-            // todo - for now copy the js file without svelte compiling. 
-            //someday we might just create it dynamically
+         try {
+            let compiled = compile(source, { filename: file.path, ...svelteOptions })
+            // default components import internals from "./svelte/internal"
+            // but the service-worker will then provide that file under each component directory
+            // which, i believe, breaks some of the internals of component compiling
+            // therefore, we replace that import path with a static one
+            var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+            file.contents = Buffer.from(content)
+            file.extname = ".svg"
             done(null, file)
+         } catch (error) {
+            done(error, null)
          }
       }))
       .pipe(dest('dist/icons'))
@@ -156,7 +157,7 @@ let build = series(
    compileBookShelf
 )
 
-let develop = series(compileBookShelf, watch)
+let develop = series(build, dev)
 
 export {
    build as default,
