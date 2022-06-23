@@ -25,6 +25,10 @@ self.addEventListener('fetch', event => {
          // return .svg components with correct content type
          return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
       }))
+   } else if (event.request.url.endsWith('.html')) {
+      event.respondWith(fetch(event.request).then(response => {
+         return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
+      }))
    } else {
       event.respondWith(fetch(event.request))
    }

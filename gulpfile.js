@@ -32,7 +32,7 @@ function clean(done) {
    del('dist/**', done)
 }
 
-function html() {
+function index() {
    return src('src/index.html')
       .pipe(dest('dist'))
 }
@@ -49,6 +49,20 @@ async function styles() {
       // plugins configured in ./postcss.config.cjs
       .pipe(gulppostcss())
       .pipe(dest('dist/styles'))
+}
+
+function pages() {
+   return src('src/book/**/*.html')
+      .pipe(through.obj(function (file, encoding, done) {
+         let source = file.contents.toString()
+         let compiled = compile(source, { filename: file.path, ...svelteOptions })
+         var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+         file.contents = Buffer.from(content)
+         file.extname = ".html"
+         done(null, file)
+
+      }))
+      .pipe(dest('dist/book'))
 }
 
 async function components() {
@@ -107,12 +121,13 @@ function dev(done) {
    })
 
    // watch each type of file seperately so we can more efficently run just that pipeline 
+   watch('src/index.html', index)
    watch('static/**', assets)
-   watch('src/**/*.svelte', components)
-   watch('src/index.html', html)
-   watch('src/**/*.js', js)
-   watch('src/styles/**', styles)
    watch('src/icons/**', icons)
+   watch('src/styles/**', styles)
+   watch('src/**/*.js', js)
+   watch('src/**/*.svelte', components)
+   watch('src/book/**/*.html', pages)
 
    done()
 }
@@ -121,20 +136,15 @@ function icons() {
    return src('src/icons/**/*.svg')
       .pipe(through.obj(function (file, enc, done) {
          let source = file.contents.toString()
-
-         try {
-            let compiled = compile(source, { filename: file.path, ...svelteOptions })
-            // default components import internals from "./svelte/internal"
-            // but the service-worker will then provide that file under each component directory
-            // which, i believe, breaks some of the internals of component compiling
-            // therefore, we replace that import path with a static one
-            var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
-            file.contents = Buffer.from(content)
-            file.extname = ".svg"
-            done(null, file)
-         } catch (error) {
-            done(error, null)
-         }
+         let compiled = compile(source, { filename: file.path, ...svelteOptions })
+         // default components import internals from "./svelte/internal"
+         // but the service-worker will then provide that file under each component directory
+         // which, i believe, breaks some of the internals of component compiling
+         // therefore, we replace that import path with a static one
+         var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+         file.contents = Buffer.from(content)
+         file.extname = ".svg"
+         done(null, file)
       }))
       .pipe(dest('dist/icons'))
 }
@@ -144,11 +154,12 @@ function icons() {
 let compileBookShelf = parallel(
    assets,
    components,
-   html,
+   index,
    internals,
    js,
    styles,
-   icons
+   icons,
+   pages
 )
 
 // default task is to clean and run build
@@ -162,8 +173,5 @@ let develop = series(build, dev)
 export {
    build as default,
    build as build,
-   develop as develop,
-   clean as clean,
-   styles as styles,
-   components as components
+   develop as develop
 }
