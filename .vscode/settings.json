@@ -19,5 +19,6 @@
     "sash.hoverBorder": "#b34900",
     "statusBarItem.remoteBackground": "#803400",
     "statusBarItem.remoteForeground": "#e7e7e7"
-  }
+  },
+  "svg.preview.background": "white"
 }

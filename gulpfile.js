@@ -101,7 +101,8 @@ async function components() {
                done(null, file)
             })
             .catch(err => {
-               done(err, null)
+               console.log(err)
+               // done(err, null)
             })
       }))
       .pipe(fixInternals())
@@ -118,12 +119,13 @@ function dependencies() {
       }))
       .pipe(dest('dist/dependencies'))
 
-      // an example for other client dependencies
-      // .pipe(src('node_modules/yargs/index.mjs'))
+      // // svelte transitions
+      // .pipe(src('node_modules/svelte/transition/index.mjs'))
       // .pipe(rename(function (path) {
-      //    path.basename = 'yargs'
+      //    path.basename = 'transition'
       // }))
       // .pipe(dest('dist/dependencies'))
+
 
       // pagejs client router
       .pipe(src('node_modules/page/page.mjs'))

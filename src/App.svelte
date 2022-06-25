@@ -1,22 +1,16 @@
 <script>
    import Header from "./components/Header.svelte";
+   import Drawer from "./components/Drawer.svelte";
    import Pager from "./components/Pager.svelte";
+   let drawer = false;
 </script>
 
-<Header />
+<Header bind:open={drawer} />
+<Drawer bind:open={drawer} />
 
 <main>
-   <nav>
-      <a href="/">Cover</a>
-      <a href="ghosting-the-edge">Ghosting the Edge</a>
-      <a href="the-usual-supects">The Usual Suspects</a>
-      <a href="gearing-up">Gearing Up</a>
-      <a href="rules-to-break">Rules to Break</a>
-      <a href="running-the-edge">Running the Edge</a>
-      <a href="afterwards">Afterwards</a>
-   </nav>
    <div id="page">
-       <Pager/>
+      <Pager />
    </div>
 </main>
 
