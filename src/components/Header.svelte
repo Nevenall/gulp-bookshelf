@@ -10,7 +10,7 @@
    let title = "Ghosting the Edge";
 
    let collapsed = false;
-   export let open =false;
+   export let open = false;
 </script>
 
 <svelte:window on:scroll={() => (collapsed = window.scrollY > 5)} />
