@@ -16,22 +16,24 @@
   "devDependencies": {
     "autoprefixer": "^10.4.7",
     "browser-sync": "^2.26.12",
+    "cssnano": "^5.1.12",
     "delete": "^1.1.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^3.0.0",
     "gulp-postcss": "^9.0.0",
+    "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "postcss": "^8.4.14",
     "postcss-import": "^14.1.0",
     "postcss-load-config": "^4.0.1",
     "postcss-nested": "^5.0.6",
+    "postcss-scss": "^4.0.4",
     "postcss-strip-inline-comments": "^0.1.5",
     "svelte": "^3.28.0",
     "svelte-preprocess": "^4.3.2",
-    "cssnano": "^5.1.12",
-    "postcss-scss": "^4.0.4",
-    "through2": "^4.0.2"
+    "through2": "^4.0.2",
+    "page": "^1.11.6"
   }
 }

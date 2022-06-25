@@ -7,6 +7,7 @@ import replace from 'gulp-replace'
 import sourcemaps from 'gulp-sourcemaps'
 
 import concat from "gulp-concat"
+import rename from 'gulp-rename'
 import gulpif from 'gulp-if'
 import del from 'delete'
 import { dirname } from 'path'
@@ -24,6 +25,13 @@ import browserSync from 'browser-sync'
 let svelteOptions = {
    sveltePath: './svelte'
 }
+
+// default components import internals from "./svelte/internal"
+// but the service-worker will then provide that file under each component directory
+// which breaks some of the internals of component compiling
+// therefore, we replace that import path with a static one
+// const fixInternals = replace('./svelte/internal', '/dependencies/svelte/index.mjs')
+function fixInternals() { return replace('./svelte/internal', '/dependencies/svelte/index.mjs') }
 
 let devServer = browserSync.create()
 
@@ -56,12 +64,13 @@ function pages() {
       .pipe(through.obj(function (file, encoding, done) {
          let source = file.contents.toString()
          let compiled = compile(source, { filename: file.path, ...svelteOptions })
-         var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+         var content = compiled.js.code
          file.contents = Buffer.from(content)
          file.extname = ".html"
          done(null, file)
 
       }))
+      .pipe(fixInternals())
       .pipe(dest('dist/book'))
 }
 
@@ -87,7 +96,7 @@ async function components() {
                // but the service-worker will then provide that file under each component directory
                // which, i believe, breaks some of the internals of component compiling
                // therefore, we replace that import path with a static one
-               var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+               var content = compiled.js.code
                file.contents = Buffer.from(content)
                done(null, file)
             })
@@ -95,12 +104,34 @@ async function components() {
                done(err, null)
             })
       }))
+      .pipe(fixInternals())
       .pipe(dest('dist'))
 }
 
-function internals() {
+// copy client dependencies and do some renaming
+function dependencies() {
    return src('node_modules/svelte/internal/index.mjs')
-      .pipe(dest('dist/svelte/internal'))
+      // Svelte internals 
+      .pipe(rename(function (path) {
+         path.dirname = 'svelte'
+         path.basename = 'index'
+      }))
+      .pipe(dest('dist/dependencies'))
+
+      // an example for other client dependencies
+      // .pipe(src('node_modules/yargs/index.mjs'))
+      // .pipe(rename(function (path) {
+      //    path.basename = 'yargs'
+      // }))
+      // .pipe(dest('dist/dependencies'))
+
+      // pagejs client router
+      .pipe(src('node_modules/page/page.mjs'))
+      .pipe(rename(function (path) {
+         path.dirname = 'page'
+         path.basename = 'index'
+      }))
+      .pipe(dest('dist/dependencies'))
 }
 
 function assets() {
@@ -137,15 +168,13 @@ function icons() {
       .pipe(through.obj(function (file, enc, done) {
          let source = file.contents.toString()
          let compiled = compile(source, { filename: file.path, ...svelteOptions })
-         // default components import internals from "./svelte/internal"
-         // but the service-worker will then provide that file under each component directory
-         // which, i believe, breaks some of the internals of component compiling
-         // therefore, we replace that import path with a static one
-         var content = compiled.js.code.replace("./svelte/internal", "/svelte/internal")
+
+         var content = compiled.js.code
          file.contents = Buffer.from(content)
          file.extname = ".svg"
          done(null, file)
       }))
+      .pipe(fixInternals())
       .pipe(dest('dist/icons'))
 }
 
@@ -155,7 +184,7 @@ let compileBookShelf = parallel(
    assets,
    components,
    index,
-   internals,
+   dependencies,
    js,
    styles,
    icons,
@@ -173,5 +202,6 @@ let develop = series(build, dev)
 export {
    build as default,
    build as build,
-   develop as develop
+   develop as develop,
+   dependencies as dependencies
 }

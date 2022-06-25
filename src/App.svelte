@@ -1,16 +1,22 @@
 <script>
    import Header from "./components/Header.svelte";
-   import Page1 from "./book/01 Ghosting the Edge.html";
-   // import Drawer from "./components/Drawer.svelte";
-   // header has an event for clicking the menu button
-   // which we can use to tell the drawer to toggle.
+   import Pager from "./components/Pager.svelte";
 </script>
 
 <Header />
 
 <main>
+   <nav>
+      <a href="/">Cover</a>
+      <a href="ghosting-the-edge">Ghosting the Edge</a>
+      <a href="the-usual-supects">The Usual Suspects</a>
+      <a href="gearing-up">Gearing Up</a>
+      <a href="rules-to-break">Rules to Break</a>
+      <a href="running-the-edge">Running the Edge</a>
+      <a href="afterwards">Afterwards</a>
+   </nav>
    <div id="page">
-      <Page1 />
+       <Pager/>
    </div>
 </main>
 

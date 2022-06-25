@@ -30,6 +30,6 @@ self.addEventListener('fetch', event => {
          return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
       }))
    } else {
-      event.respondWith(fetch(event.request))
+      event.respondWith(fetch(event.request).catch(err => console.log(err)))
    }
 })
