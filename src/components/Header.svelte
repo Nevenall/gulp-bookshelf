@@ -84,6 +84,11 @@
       transition: width var(--transition-fast);
       box-shadow: var(--elevation-4);
       background: var(--app-color-primary);
+
+      svg.icon {
+         height: 1.5rem;
+         fill: var(--app-color-text);
+      }
    }
 
    header.collapsed {
@@ -121,12 +126,6 @@
       outline: none;
       cursor: pointer;
       transition: background var(--transition);
-   }
-
-   :global(svg) {
-      height: 1.5rem;
-      width: auto;
-      fill: var(--app-color-text);
    }
 
    a:hover,

@@ -1,6 +1,3 @@
-// global variables
-
-
 :root {
 
    --header-spacing: 3rem;
@@ -42,7 +39,7 @@
    --app-color-text: #212121;
 
 
-
+   // Content styles
    // text colors
    --color-dark: #3a3a3a;
    --color-light: #eee;
@@ -55,4 +52,3 @@
    --user-color-pref: 'unset';
 
 }
-

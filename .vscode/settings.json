@@ -1,5 +1,4 @@
 {
- 
   "peacock.color": "#803400",
   "workbench.colorCustomizations": {
     "activityBar.background": "#b34900",
@@ -20,5 +19,8 @@
     "statusBarItem.remoteBackground": "#803400",
     "statusBarItem.remoteForeground": "#e7e7e7"
   },
-  "svg.preview.background": "white"
+  "svg.preview.background": "white",
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  }
 }

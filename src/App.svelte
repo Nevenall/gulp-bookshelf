@@ -2,7 +2,6 @@
    import Header from "./components/Header.svelte";
    import Drawer from "./components/Drawer.svelte";
    import Error from "./components/Error.svelte";
-
    // this is a client dependency so right now it has to reference the dist path
    import router from "/dependencies/page/index.mjs";
    import pages from "/book/book.js";
