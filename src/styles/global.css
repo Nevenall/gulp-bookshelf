@@ -38,7 +38,6 @@ main {
    margin: 0 auto;
 }
 
-
 svg {
    width: auto;
 }
@@ -46,9 +45,13 @@ svg {
 // size svg icons to fit into text
 svg.icon {
    height: 1.5rem;
-  
 }
 
+// size svg logo
+svg.logo {
+   height: 15rem;
+   margin: auto;
+}
 
 // create ripple effect
 .ripple {

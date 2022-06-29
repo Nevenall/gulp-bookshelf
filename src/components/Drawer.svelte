@@ -5,10 +5,10 @@
 </script>
 
 <nav class="drawer" class:open>
-   <Logo  />
+   <Logo class="logo" />
    <ul>
       {#each pages as page}
-         <li><a href={page.path}>{page.name}</a></li>
+         <li class="ripple"><a href={page.path}>{page.name}</a></li>
       {/each}
    </ul>
 </nav>
@@ -33,22 +33,23 @@
       }
    }
 
-   nav svg {
-      height: 15rem;
-      width: auto;
-   }
-
    ul {
       list-style: none;
       margin: 0;
       margin-top: 2rem;
+      padding-left: 1rem;
 
       & li {
          margin-bottom: 1rem;
+         width: 100%;
       }
 
       & a {
+         display: inline-block;
          color: var(--color-text);
+         text-decoration: none;
+         height: 100%;
+         width: 100%;
       }
    }
 </style>
