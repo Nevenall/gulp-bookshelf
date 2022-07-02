@@ -44,6 +44,10 @@
          width: 100%;
       }
 
+      & a:hover {
+         text-decoration: underline;
+      }
+
       & a {
          display: inline-block;
          color: var(--color-text);

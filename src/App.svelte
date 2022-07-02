@@ -7,10 +7,12 @@
    import pages from "/book/book.js";
    // start on the first page, the README
    let page = pages[0].page;
+   let pageName = "Ghosting the Edge";
 
    pages.forEach((r) => {
       router(r.path, () => {
          page = r.page;
+         pageName = r.name;
       });
    });
 
@@ -23,6 +25,10 @@
 
    let drawer = false;
 </script>
+
+<svelte:head>
+   <title>{pageName}</title>
+</svelte:head>
 
 <Header bind:open={drawer} />
 <Drawer bind:open={drawer} />

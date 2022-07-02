@@ -1,11 +1,30 @@
-self.addEventListener('install', event => {
-   event.waitUntil(self.skipWaiting())
+
+
+// we are triggering a refresh of tabs when there is a new verison which is ok for us because we don't have data to lose
+var refreshing
+self.addEventListener('controllerchange', event => {
+   if (refreshing) return
+   refreshing = true
+   window.location.reload()
 })
+
+
+
+self.addEventListener('install', event => {
+   // tell the worker to activate immediately
+   self.skipWaiting()
+   //todo - fetch and cache pages locally
+   //event.waitUntil(self.skipWaiting())
+})
+
+
 
 self.addEventListener('activate', event => {
    // Grab all pages
    event.waitUntil(self.clients.claim())
 })
+
+
 
 self.addEventListener('fetch', event => {
    // check if requested resource is an import.

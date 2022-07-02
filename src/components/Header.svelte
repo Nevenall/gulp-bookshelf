@@ -101,9 +101,11 @@
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
+
       * {
          margin-right: 1rem;
       }
+      
       *:last-child {
          margin-right: 0;
       }

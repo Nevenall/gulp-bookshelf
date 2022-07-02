@@ -31,7 +31,9 @@ let svelteOptions = {
 // which breaks some of the internals of component compiling
 // therefore, we replace that import path with a static one
 // const fixInternals = replace('./svelte/internal', '/dependencies/svelte/index.mjs')
-function fixInternals() { return replace('./svelte/internal', '/dependencies/svelte/index.mjs') }
+function fixInternals() {
+   return replace('./svelte/internal', '/dependencies/svelte/index.mjs')
+}
 
 let devServer = browserSync.create()
 
@@ -72,6 +74,11 @@ function pages() {
       }))
       .pipe(fixInternals())
       .pipe(dest('dist/book'))
+}
+
+function assets() {
+   return src('src/book/assets/**')
+      .pipe(dest('dist/assets'))
 }
 
 async function components() {
@@ -136,7 +143,7 @@ function dependencies() {
       .pipe(dest('dist/dependencies'))
 }
 
-function assets() {
+function staticFiles() {
    // copy static files
    return src('static/**')
       .pipe(dest('dist'))
@@ -155,7 +162,7 @@ function dev(done) {
 
    // watch each type of file seperately so we can more efficently run just that pipeline 
    watch('src/index.html', index)
-   watch('static/**', assets)
+   watch('static/**', staticFiles)
    watch('src/icons/**', icons)
    watch('src/styles/**', styles)
    watch('src/**/*.js', js)
@@ -183,14 +190,15 @@ function icons() {
 // build processes files, 
 // currently in parallel, but there may be some parts we want to serialize because, of sass and svelte stuff
 let compileBookShelf = parallel(
-   assets,
+   staticFiles,
    components,
    index,
    dependencies,
    js,
    styles,
    icons,
-   pages
+   pages,
+   assets
 )
 
 // default task is to clean and run build
