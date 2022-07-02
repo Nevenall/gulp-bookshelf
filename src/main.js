@@ -1,29 +1,22 @@
 if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register('/service-worker.js', { type: 'module' })
       .then(registration => {
-         return registration.active
+         console.log(`main - ready`)
+         return navigator.serviceWorker.ready
       })
-      .then(async registration => {
-         console.log(`main - activated? I think`)
+      .then(sw => {
+         console.log(`main - activated? = ${sw.active}`)
          // when the service worker is activated, dynamically import the root svelte component.
          // this prevents the browser from attempting to load files before the service-worker fetch is available
-         const App = await import('/App.svelte')
-
-         new App.default({
-            target: document.body,
-            props: {
-               name: 'world'
-            }
+         import('/App.svelte').then(App => {
+            new App.default({
+               target: document.body,
+               props: {
+                  name: 'world'
+               }
+            })
          })
       })
-
-
-
-   // console.log(`main - ${registration}`)
-
-
-
-
 
 
 }
