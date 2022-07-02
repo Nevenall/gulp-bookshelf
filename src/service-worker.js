@@ -1,8 +1,7 @@
-
-
 // we are triggering a refresh of tabs when there is a new verison which is ok for us because we don't have data to lose
 var refreshing
 self.addEventListener('controllerchange', event => {
+   console.log('sw controllerchange')
    if (refreshing) return
    refreshing = true
    window.location.reload()
@@ -11,6 +10,7 @@ self.addEventListener('controllerchange', event => {
 
 
 self.addEventListener('install', event => {
+   console.log('sw install')
    // tell the worker to activate immediately
    self.skipWaiting()
    //todo - fetch and cache pages locally
@@ -19,9 +19,35 @@ self.addEventListener('install', event => {
 
 
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate',  event => {
+   console.log('sw activated')
+
+   // import('/App.svelte').then(App => {
+   //    new App.default({
+   //       target: document.body,
+   //       props: {
+   //          name: 'world'
+   //       }
+   //    })
+   // })
+
+   // // when the service worker is activated, dynamically import the root svelte component.
+   // // this prevents the browser from attempting to load files before the service-worker fetch is available
+   // const App = await import('/App.svelte')
+
+   // new App.default({
+   //    target: document.body,
+   //    props: {
+   //       name: 'world'
+   //    }
+   // })
+
+
+
    // Grab all pages
    event.waitUntil(self.clients.claim())
+
+
 })
 
 
