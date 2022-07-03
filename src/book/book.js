@@ -1,4 +1,4 @@
-import Page0 from './readme.html'
+import Page0 from './cover.html'
 import Page1 from './readme.html'
 import Page2 from './01 Ghosting the Edge.html'
 import Page3 from './02 The Usual Suspects.html'

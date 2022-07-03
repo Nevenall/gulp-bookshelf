@@ -2,7 +2,7 @@
 </script>
 
 <div>
-   <h2>Error!</h2>
+   <h2>Error! 404</h2>
 </div>
 
 <style lang="postcss">
