@@ -1,23 +1,21 @@
-
+const channel = new BroadcastChannel('sw-messages')
 
 self.addEventListener('install', event => {
    console.log('sw - install')
    // tell the worker to activate immediately
    // we don't really have data to be inconsistant
    //todo - fetch and cache pages locally
-   event.waitUntil(self.skipWaiting())
+   self.skipWaiting()
 })
-
-
 
 self.addEventListener('activate', event => {
    console.log('sw - activated')
-
    // Grab all pages
    // important for initial installation to work
-   event.waitUntil(self.clients.claim())
+   self.clients.claim()
+   // broadcast a reload message
+   channel.postMessage({ reload: true, msg: 'service-worker activated' })
 })
-
 
 self.addEventListener('fetch', event => {
    // check if requested resource is an import.
@@ -25,7 +23,7 @@ self.addEventListener('fetch', event => {
 
    if (event.request.url.endsWith('.svelte')) {
       event.respondWith(fetch(event.request).then(response => {
-         // return .svelte chromecomponents with correct content type
+         // return .svelte components with correct content type
          return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
       }))
    } else if (event.request.url.endsWith('.svg')) {
@@ -35,6 +33,7 @@ self.addEventListener('fetch', event => {
       }))
    } else if (event.request.url.endsWith('.html')) {
       event.respondWith(fetch(event.request).then(response => {
+         // return .html with the correct content type
          return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
       }))
    } else {
