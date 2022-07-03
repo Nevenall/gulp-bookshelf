@@ -6,7 +6,6 @@ channel.addEventListener('message', event => {
    }
 })
 
-
 if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register('/service-worker.js', { type: 'module', scope: '/' })
       .then(registration => {

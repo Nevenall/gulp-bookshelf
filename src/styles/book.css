@@ -1,5 +1,62 @@
-//todo could be imported into a page component
-//
+// book specific fonts
+@import url("https://fonts.googleapis.com/css?family=Abel&display=swap");
+
+@font-face {
+   font-family: 'Raleway';
+   font-style: Italic;
+   font-weight: 300;
+   font-display: swap;
+   src: url("/fonts/Raleway-LightItalic.woff2") format('woff2');
+}
+
+@font-face {
+   font-family: 'Raleway';
+   font-style: Italic;
+   font-weight: 400;
+   font-display: swap;
+   src: url("/fonts/Raleway-Italic.woff2") format('woff2');
+}
+
+@font-face {
+   font-family: 'Raleway';
+   font-style: Italic;
+   font-weight: 700;
+   font-display: swap;
+   src: url("/fonts/Raleway-BoldItalic.woff2") format('woff2');
+}
+
+@font-face {
+   font-family: 'Raleway';
+   font-style: normal;
+   font-weight: 300;
+   font-display: swap;
+   src: url("/fonts/Raleway-Light.woff2") format('woff2');
+}
+
+@font-face {
+   font-family: 'Raleway';
+   font-style: normal;
+   font-weight: 400;
+   font-display: swap;
+   src: url("/fonts/Raleway-Regular.woff2") format('woff2');
+}
+
+@font-face {
+   font-family: 'Raleway';
+   font-style: normal;
+   font-weight: 700;
+   font-display: swap;
+   src: url("/fonts/Raleway-Bold.woff2") format('woff2');
+}
+
+@font-face {
+   font-family: 'Fate';
+   font-style: normal;
+   font-weight: 400;
+   font-display: swap;
+   src: url("/fonts/Fate-Icons.woff2") format('woff2');
+}
+
 
 #page {
    h1,

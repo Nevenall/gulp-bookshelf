@@ -8,7 +8,6 @@
          open = false;
       }
    }
-
 </script>
 
 <svelte:window on:keydown={keydown} />
