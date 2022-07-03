@@ -8,6 +8,7 @@
    // start on the first page, the README
    let page = pages[0].page;
    let pageName = "Ghosting the Edge";
+   let pageElement;
 
    pages.forEach((r) => {
       router(r.path, () => {
@@ -24,7 +25,16 @@
    router.start();
 
    let drawer = false;
+
+   // if nav is open and we click on the page, close the drawer
+   function click(event) {
+      if (pageElement.contains(event.target)) {
+         drawer = false;
+      }
+   }
 </script>
+
+<svelte:window on:click={click} />
 
 <svelte:head>
    <title>{pageName}</title>
@@ -34,7 +44,7 @@
 <Drawer bind:open={drawer} />
 
 <main>
-   <div id="page">
+   <div id="page" bind:this={pageElement}>
       <svelte:component this={page} />
    </div>
 </main>

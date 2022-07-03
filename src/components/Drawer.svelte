@@ -2,7 +2,16 @@
    import { Logo } from "/icons/index.js";
    import pages from "/book/book.js";
    export let open = false;
+   
+   function keydown(event) {
+      if (event.code === "Escape") {
+         open = false;
+      }
+   }
+
 </script>
+
+<svelte:window on:keydown={keydown} />
 
 <nav class="drawer" class:open>
    <Logo class="logo" />

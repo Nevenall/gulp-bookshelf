@@ -2,7 +2,6 @@ const channel = new BroadcastChannel('sw-messages')
 channel.addEventListener('messageerror', event => { console.error(event) })
 channel.addEventListener('message', event => {
    if (event.data.reload) {
-      console.log('main - ', event.data)
       window.location.reload()
    }
 })
@@ -11,12 +10,9 @@ channel.addEventListener('message', event => {
 if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register('/service-worker.js', { type: 'module', scope: '/' })
       .then(registration => {
-         console.log(`main - ready`)
          return navigator.serviceWorker.ready
       })
       .then(sw => {
-         console.log(`main - import - sw ${sw.active.state}`)
-         // debugger
          return import('/App.svelte')
       })
       .then(App => {
