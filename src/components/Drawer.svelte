@@ -16,7 +16,7 @@
    <Logo class="logo" />
    <ul>
       {#each pages as page}
-         <li class="ripple"><a href={page.path}>{page.name}</a></li>
+         <li class="ripple"><a href={page.path}>{page.title}</a></li>
       {/each}
    </ul>
 </nav>
