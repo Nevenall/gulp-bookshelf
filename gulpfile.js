@@ -70,7 +70,6 @@ function pages() {
          file.contents = Buffer.from(content)
          file.extname = ".html"
          done(null, file)
-
       }))
       .pipe(fixInternals())
       .pipe(dest('dist/book'))
@@ -109,7 +108,6 @@ async function components() {
             })
             .catch(err => {
                console.log(err)
-               // done(err, null)
             })
       }))
       .pipe(fixInternals())
