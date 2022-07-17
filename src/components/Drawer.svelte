@@ -2,7 +2,7 @@
    import { Logo } from "/icons/index.js";
    import pages from "/book/book.js";
    export let open = false;
-   
+
    function keydown(event) {
       if (event.code === "Escape") {
          open = false;
@@ -13,7 +13,7 @@
 <svelte:window on:keydown={keydown} />
 
 <nav class="drawer" class:open>
-   <Logo class="logo" />
+   <Logo />
    <ul>
       {#each pages as page}
          <li class="ripple"><a href={page.path}>{page.title}</a></li>
@@ -30,6 +30,7 @@
       left: 0;
       width: 15rem;
       height: 100vh;
+      overflow-y: auto;
       transform: translate3d(-15rem, 0, 0);
       transition: transform var(--transition);
       box-shadow: var(--elevation-4);
@@ -39,6 +40,7 @@
          transform: translate3d(0, 0, 0);
          transition: transform var(--transition);
       }
+
    }
 
    ul {

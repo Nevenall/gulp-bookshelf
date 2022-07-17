@@ -13,7 +13,7 @@
    pages.forEach((r) => {
       router(r.path, () => {
          page = r.page;
-         pageName = r.name;
+         pageName = r.title;
       });
    });
 
