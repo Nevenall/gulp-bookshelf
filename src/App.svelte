@@ -51,6 +51,6 @@
 
 <style>
    main {
-      margin-top: calc(var(--header-spacing) + 2rem);
+      margin-block-start: calc(var(--header-spacing) + 2rem);
    }
 </style>

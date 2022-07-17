@@ -63,11 +63,10 @@
    header {
       height: var(--header-spacing);
       width: 100vw;
-      margin: 0;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      margin: 0;
       padding: 0 1rem;
       z-index: 50;
    }
@@ -94,7 +93,7 @@
    header.collapsed {
       width: 10rem;
       box-shadow: var(--elevation-8);
-      border-bottom-right-radius: calc(var(--header-spacing) / 2);
+      border-radius: 0 0 calc(var(--header-spacing) / 2) 0;
    }
 
    .end {
@@ -103,11 +102,11 @@
       align-items: center;
 
       * {
-         margin-right: 1rem;
+         margin-inline-end: 1rem;
       }
       
       *:last-child {
-         margin-right: 0;
+         margin-inline-end: 0;
       }
    }
 
@@ -136,8 +135,8 @@
    }
 
    span {
-      margin-left: 2rem;
-      margin-right: auto;
+      margin-inline-start: 2rem;
+      margin-inline-end: auto;
       color: var(--app-color-text);
 
       display: flex;

@@ -24,10 +24,10 @@
 <style lang="postcss">
    nav {
       position: fixed;
-      float: left;
-      padding-top: calc(var(--header-spacing) + 2rem);
-      top: 0;
-      left: 0;
+      float: inline-start;
+      padding-block-start: calc(var(--header-spacing) + 2rem);
+      block-start: 0;
+      inline-start: 0;
       width: 15rem;
       height: 100vh;
       overflow-y: auto;
@@ -46,11 +46,11 @@
    ul {
       list-style: none;
       margin: 0;
-      margin-top: 2rem;
-      padding-left: 1rem;
+      margin-block-start: 2rem;
+      padding-inline-start: 1rem;
 
       & li {
-         margin-bottom: 1rem;
+         margin-block-end: 1rem;
          width: 100%;
       }
 
