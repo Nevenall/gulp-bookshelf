@@ -42,7 +42,8 @@
          </button>
          <a
             class="ripple"
-            target="_blank"
+            target="_blank" 
+            rel="noreferrer"
             href="https://github.com/Nevenall/gulp-bookshelf"
             title="visit the github repository"
          >

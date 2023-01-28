@@ -200,3 +200,9 @@ Be a while, but I was trying out snowpack and I find myself liking this better. 
 
 Got the pages going pretty well in snowpack, but it doesn't really do the internal relative links very well. I would have to do some kind of fix up for each link in the page, which I don't want to do. 
 
+## 1.27.2023, danb
+
+hello old friend. Lots of changes, but also, the basics are still the same. 
+we have mostly switched to postcss, but it looks like https://preset-env.cssdb.org/ will cover most of the things we want to do, and include future css features.
+
+also, can we take a look at https://vitejs.dev/? for the frontend building
