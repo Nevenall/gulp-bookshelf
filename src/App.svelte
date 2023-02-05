@@ -11,9 +11,13 @@
    let pageElement;
 
    chapters.forEach((r) => {
-      router(r.path, () => {
+      router(r.path, (ctx, next) => {
          page = r.chapter;
          pageName = r.title;
+         console.log(ctx);
+         console.log(next)
+         scrollToHeader(ctx.hash);
+         // seems like the toc links are not routing
       });
    });
 
@@ -23,6 +27,14 @@
    });
 
    router.start();
+
+   function scrollToHeader(header) {
+      if (!header) return;
+
+      let el = document.getElementById(header);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth" });
+   }
 
    let drawer = false;
 

@@ -228,3 +228,8 @@ I wonder if there is a variable version of Abel?
 I doubt there will be any good tools to extrapolate a regular font into a variable one. 
 Abel doesn't really need to be variable, it's not doing that much. Well, more then it should probably. I like it as headers, but I wonder if it's too much? Should it be the game mechanics font for stunt descriptions and such, and we find another font to use for  headers? 
 that's 3 fonts **and** they are all sansserif. that sounds like a terrible idea. 
+
+## 2.5.2023, danb
+
+got two levels of headers in the nav, which is good. However, something is preserving scroll locations, between pages. And, anchor links only work if they are for the page that is loaded. Also, we need to decode some of the header titles. 
+
