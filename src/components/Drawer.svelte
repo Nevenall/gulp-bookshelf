@@ -16,7 +16,15 @@
    <Logo />
    <ul>
       {#each chapters as chapter}
+
+      <!-- todo - we now have a full toc for each chapter, we proably need a recursive svelte compoent for this
+      what do we want the ui to be? 
+      we could also display and arbitrary 3 levels. 
+      if the chapter has multiple top levels that should be ok.
+      
+      -->
          <li class="ripple"><a href={chapter.path}>{chapter.title}</a></li>
+        
       {/each}
    </ul>
 </nav>
