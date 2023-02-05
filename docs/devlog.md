@@ -205,4 +205,26 @@ Got the pages going pretty well in snowpack, but it doesn't really do the intern
 hello old friend. Lots of changes, but also, the basics are still the same. 
 we have mostly switched to postcss, but it looks like https://preset-env.cssdb.org/ will cover most of the things we want to do, and include future css features.
 
-also, can we take a look at https://vitejs.dev/? for the frontend building
+also, can we take a look at https://vitejs.dev/? for the frontend building. 
+Vite does the thing it does, which would be good for an ordinary web site, but this is more of a mobile app. 
+
+## 1.28.2023, danb
+
+Our service worker is doing a lot of framework kinda of stuff. That is what allows for us to do things like import html content in js. 
+Ok, I think our little app here is workable. Something like an MVP. The main thing we are missing is the rest of the book css, coloring and navigation inside of pages. 
+Also, we need the service worker to do the page caching on startup. Then, maybe react to messages about page content updates? Though that is rare. 
+
+It's the write side that needs to output the book.js and the internal navigation. 
+maybe each page has a nav object for it's internal tree, and that would be (path,title) in a tree? #id works already, a page with a flat list of the ids in that page would work as links. but what we miss is the hierarchy. 
+
+Aaaand we should make an onhover to reveal the anchor link for a section. that way we can easily copy and paste a section link. 
+
+what about search? if this was a reference book quick search is important. 
+
+## 1.30.2023, danb
+
+I think the biggest thing for us to work on is making use of variables fonts. There's a var version of raleway and I don't think I'll have to edit it. 
+I wonder if there is a variable version of Abel? 
+I doubt there will be any good tools to extrapolate a regular font into a variable one. 
+Abel doesn't really need to be variable, it's not doing that much. Well, more then it should probably. I like it as headers, but I wonder if it's too much? Should it be the game mechanics font for stunt descriptions and such, and we find another font to use for  headers? 
+that's 3 fonts **and** they are all sansserif. that sounds like a terrible idea. 
