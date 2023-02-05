@@ -4,15 +4,15 @@
    import Error from "./components/Error.svelte";
    // this is a client dependency so right now it has to reference the dist path
    import router from "/dependencies/page/index.mjs";
-   import pages from "/book/book.js";
-   // start on the first page, the README
-   let page = pages[0].page;
+   import chapters from "/book/book.js";
+   // start on the first chapter, the README
+   let page = chapters[0].chapter;
    let pageName = "Ghosting the Edge";
    let pageElement;
 
-   pages.forEach((r) => {
+   chapters.forEach((r) => {
       router(r.path, () => {
-         page = r.page;
+         page = r.chapter;
          pageName = r.title;
       });
    });
