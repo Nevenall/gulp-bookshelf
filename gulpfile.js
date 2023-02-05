@@ -61,7 +61,7 @@ async function styles() {
       .pipe(dest('dist/styles'))
 }
 
-function pages() {
+function chapters() {
    return src('src/book/**/*.html')
       .pipe(through.obj(function (file, encoding, done) {
          let source = file.contents.toString()
@@ -165,7 +165,7 @@ function dev(done) {
    watch('src/styles/**', styles)
    watch('src/**/*.js', js)
    watch('src/**/*.svelte', components)
-   watch('src/book/**/*.html', pages)
+   watch('src/book/**/*.html', chapters)
 
    done()
 }
@@ -195,7 +195,7 @@ let compileBookShelf = parallel(
    js,
    styles,
    icons,
-   pages,
+   chapters,
    assets
 )
 
