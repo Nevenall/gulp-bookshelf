@@ -233,3 +233,7 @@ that's 3 fonts **and** they are all sansserif. that sounds like a terrible idea.
 
 got two levels of headers in the nav, which is good. However, something is preserving scroll locations, between pages. And, anchor links only work if they are for the page that is loaded. Also, we need to decode some of the header titles. 
 
+ok, anchor nav doesn't work because the page router callback comes before the dynamic component is mounted to the dom. 
+we need to set an onmount for the chapter component itself.
+
+We could have write inject a script block in each chapter to provide anchor nav

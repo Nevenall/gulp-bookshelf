@@ -1,4 +1,5 @@
 <script>
+   import { afterUpdate } from "/dependencies/svelte/index.mjs";
    import Header from "./components/Header.svelte";
    import Drawer from "./components/Drawer.svelte";
    import Error from "./components/Error.svelte";
@@ -9,15 +10,14 @@
    let page = chapters[0].chapter;
    let pageName = "Ghosting the Edge";
    let pageElement;
+   let header;
 
    chapters.forEach((r) => {
-      router(r.path, (ctx, next) => {
+      router(r.path, (ctx) => {
          page = r.chapter;
          pageName = r.title;
-         console.log(ctx);
-         console.log(next)
-         scrollToHeader(ctx.hash);
-         // seems like the toc links are not routing
+         header = ctx.hash;
+         debugger;
       });
    });
 
@@ -26,15 +26,22 @@
       page = Error;
    });
 
+   router.exit("*", (ctx, next) => {
+      // todo - track the current scroll location for each page separately
+      console.log(window.scrollY);
+      next();
+   });
+
    router.start();
 
    function scrollToHeader(header) {
       if (!header) return;
-
       let el = document.getElementById(header);
       if (!el) return;
       el.scrollIntoView({ behavior: "smooth" });
    }
+
+ 
 
    let drawer = false;
 
@@ -57,7 +64,7 @@
 
 <main>
    <div id="page" bind:this={pageElement}>
-      <svelte:component this={page} />
+      <svelte:component this={page}  />
    </div>
 </main>
 

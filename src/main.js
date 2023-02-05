@@ -1,6 +1,7 @@
 const channel = new BroadcastChannel('sw-messages')
 channel.addEventListener('messageerror', event => { console.error(event) })
 channel.addEventListener('message', event => {
+   console.log(`sw - message - ${event.data}`)
    if (event.data.reload) {
       window.location.reload()
    }
