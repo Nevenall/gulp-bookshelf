@@ -1,6 +1,7 @@
 <script>
    import { Logo } from "/icons/index.js";
    import chapters from "/book/book.js";
+    import Navigation from "./Navigation.svelte";
    export let open = false;
 
    function keydown(event) {
@@ -14,19 +15,7 @@
 
 <nav class="drawer" class:open>
    <Logo />
-   <ul>
-      {#each chapters as chapter}
-
-      <!-- todo - we now have a full toc for each chapter, we proably need a recursive svelte compoent for this
-      what do we want the ui to be? 
-      we could also display and arbitrary 3 levels. 
-      if the chapter has multiple top levels that should be ok.
-      
-      -->
-         <li class="ripple"><a href={chapter.path}>{chapter.title}</a></li>
-        
-      {/each}
-   </ul>
+   <Navigation chapters={chapters}/>
 </nav>
 
 <style lang="postcss">
@@ -50,27 +39,5 @@
       }
    }
 
-   ul {
-      list-style: none;
-      margin: 0;
-      margin-block-start: 2rem;
-      padding-inline-start: 1rem;
-
-      & li {
-         margin-block-end: 1rem;
-         width: 100%;
-      }
-
-      & a:hover {
-         text-decoration: underline;
-      }
-
-      & a {
-         display: inline-block;
-         color: var(--color-text);
-         text-decoration: none;
-         height: 100%;
-         width: 100%;
-      }
-   }
+   
 </style>

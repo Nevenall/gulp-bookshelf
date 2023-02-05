@@ -20,6 +20,7 @@ import postcss from 'postcss'
 import postcssloadconfig from 'postcss-load-config'
 
 import browserSync from 'browser-sync'
+import history from 'connect-history-api-fallback'
 
 
 let svelteOptions = {
@@ -156,6 +157,7 @@ function dev(done) {
       open: false,
       notify: false,
       // middleware for http2
+      // middleware: [history]
    })
 
    // watch each type of file seperately so we can more efficently run just that pipeline 

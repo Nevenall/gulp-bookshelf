@@ -29,12 +29,12 @@
     "postcss": "^8.4.14",
     "postcss-advanced-variables": "^3.0.1",
     "postcss-load-config": "^4.0.1",
-    "postcss-nested": "^5.0.6",
+    "postcss-nested": "^6.0.0",
     "postcss-scss": "^4.0.4",
-    "postcss-simple-vars": "^6.0.3",
+    "postcss-simple-vars": "^7.0.1",
     "postcss-strip-inline-comments": "^0.1.5",
     "svelte": "^3.28.0",
-    "svelte-preprocess": "^4.3.2",
+    "svelte-preprocess": "^5.0.1",
     "through2": "^4.0.2"
   }
 }
