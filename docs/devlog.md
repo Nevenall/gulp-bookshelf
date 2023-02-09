@@ -237,3 +237,6 @@ ok, anchor nav doesn't work because the page router callback comes before the dy
 we need to set an onmount for the chapter component itself.
 
 We could have write inject a script block in each chapter to provide anchor nav
+
+## 2.7.2023, danb
+

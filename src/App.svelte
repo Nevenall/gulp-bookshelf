@@ -17,7 +17,6 @@
          page = r.chapter;
          pageName = r.title;
          header = ctx.hash;
-         debugger;
       });
    });
 
@@ -40,8 +39,6 @@
       if (!el) return;
       el.scrollIntoView({ behavior: "smooth" });
    }
-
- 
 
    let drawer = false;
 
