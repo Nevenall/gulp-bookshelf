@@ -7,34 +7,45 @@
    import router from "/dependencies/page/index.mjs";
    import chapters from "/book/book.js";
    // start on the first chapter, the README
-   let page = chapters[0].chapter;
+   let pageText = chapters[0].chapter();
    let pageName = "Ghosting the Edge";
    let pageElement;
    let header;
 
    chapters.forEach((r) => {
-      router(r.path, (ctx) => {
-         page = r.chapter();
+      router(r.path, (ctx, next) => {
+         pageText = r.chapter();
          pageName = r.title;
          header = ctx.hash;
-         
+         console.log(`set scrollY to ${ctx.scrollY}`);
+         window.scrollY = scrollY;
+         next();
+      });
+
+      router.exit(r.path, (ctx, next) => {
+        
+         debugger
+        
+         console.log(`save scrollY = ${window.scrollY}`);
+         scrollY = window.scrollY;
+         next();
       });
    });
 
-   router("*", () => {
-      console.log("page not found");
-      page = Error;
-   });
+   // router("*", () => {
+   //    console.log("page not found");
+   //    pageText = Error;
+   // });
 
-   router.exit("*", (ctx, next) => {
-      // todo - track the current scroll location for each page separately
-      console.log(window.scrollY);
-      next();
-   });
+   // router.exit("*", (ctx, next) => {
+   //    page.scrollY = window.scrollY;
+
+   //    next();
+   // });
 
    router.start();
 
-   function scrollToHeader(header) {
+   function scrollTo(header) {
       if (!header) return;
       let el = document.getElementById(header);
       if (!el) return;
@@ -51,7 +62,7 @@
    }
 
    onMount(() => {
-      scrollToHeader(header);
+      scrollTo(header);
    });
 </script>
 
@@ -66,7 +77,7 @@
 
 <main>
    <div id="page" bind:this={pageElement}>
-      {@html page}
+      {@html pageText}
    </div>
 </main>
 
