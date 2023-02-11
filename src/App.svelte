@@ -22,6 +22,7 @@
          header = ctx.hash;
          console.log(`set scrollY to ${r.scrollY}`);
          window.scrollTo({ left: 0, top: r.scrollY });
+         // next();
       });
 
       router.exit(r.path, (ctx, next) => {
@@ -31,10 +32,10 @@
       });
    });
 
-   router("*", () => {
-      console.log("page not found");
-      pageText = Error;
-   });
+   // router("*", () => {
+   //    console.log("page not found");
+   //    pageText = Error;
+   // });
 
    router.start();
 
@@ -54,9 +55,10 @@
       }
    }
 
-   onMount(() => {
-      scrollTo(header);
-   });
+   // onMount(() => {
+   //    scrollTo(header);
+   //    console.log("Scrolled!");
+   // });
 </script>
 
 <svelte:window on:click={click} bind:scrollY />
