@@ -238,5 +238,14 @@ we need to set an onmount for the chapter component itself.
 
 We could have write inject a script block in each chapter to provide anchor nav
 
-## 2.7.2023, danb
+## 2.8.2023, danb
 
+The dynamic component throws a wrench in our anchor navigation. 
+What if we don't svelte compile the html chapters? then we can leave them as files, or easier, they are props in book.js. Either way we swap them in with {@html} rather than as components.  
+
+We can't export string content directly. It has to be js. So we could `export html=""`
+
+this proof of concept may be the exact thing I'm looking for. https://github.com/trentmwillis/html-template-es-modules 
+it injects the html contents into a js wrapper that exports a template htmlelement. 
+So, could we do that without the template element? Or make it a div called page? or chapter?
+That lets us keep the easy chapters as files and skip compiling the large html files as svelte components.

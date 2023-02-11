@@ -14,7 +14,7 @@
 
    chapters.forEach((r) => {
       router(r.path, (ctx) => {
-         page = r.chapter;
+         page = r.chapter();
          pageName = r.title;
          header = ctx.hash;
       });
@@ -61,7 +61,7 @@
 
 <main>
    <div id="page" bind:this={pageElement}>
-      <svelte:component this={page}  />
+      {@html page}
    </div>
 </main>
 

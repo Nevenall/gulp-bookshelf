@@ -65,11 +65,12 @@ async function styles() {
 function chapters() {
    return src('src/book/**/*.html')
       .pipe(through.obj(function (file, encoding, done) {
-         let source = file.contents.toString()
-         let compiled = compile(source, { filename: file.path, ...svelteOptions })
-         var content = compiled.js.code
-         file.contents = Buffer.from(content)
-         file.extname = ".html"
+         // todo - don't compile our chapters
+         // let source = file.contents.toString()
+         // let compiled = compile(source, { filename: file.path, ...svelteOptions })
+         // var content = compiled.js.code
+         // file.contents = Buffer.from(content)
+         //  file.extname = ".html"
          done(null, file)
       }))
       .pipe(fixInternals())

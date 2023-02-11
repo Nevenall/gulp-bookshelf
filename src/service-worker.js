@@ -31,10 +31,10 @@ self.addEventListener('fetch', event => {
          // return .svg components with correct content type
          return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
       }))
+      // todo - we only want to match files in the book dir for this one
    } else if (event.request.url.endsWith('.html')) {
-      event.respondWith(fetch(event.request).then(response => {
-         // return .html with the correct content type
-         return new Response(response.body, { headers: { 'Content-Type': 'application/javascript' } })
+      event.respondWith(fetch(event.request).then(response => response.text()).then(text => {
+         return new Response(`export default function() { return \`${text}\`}`, { headers: { 'Content-Type': 'application/javascript' } })
       }))
    } else {
       event.respondWith(fetch(event.request).catch(err => console.log(err)))
