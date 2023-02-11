@@ -1,5 +1,5 @@
 <script>
-   import { afterUpdate } from "/dependencies/svelte/index.mjs";
+   import { onMount } from "/dependencies/svelte/index.mjs";
    import Header from "./components/Header.svelte";
    import Drawer from "./components/Drawer.svelte";
    import Error from "./components/Error.svelte";
@@ -17,6 +17,7 @@
          page = r.chapter();
          pageName = r.title;
          header = ctx.hash;
+         
       });
    });
 
@@ -48,6 +49,10 @@
          drawer = false;
       }
    }
+
+   onMount(() => {
+      scrollToHeader(header);
+   });
 </script>
 
 <svelte:window on:click={click} />
