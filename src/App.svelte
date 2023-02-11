@@ -11,37 +11,30 @@
    let pageName = "Ghosting the Edge";
    let pageElement;
    let header;
+   let scrollY = 0;
 
    chapters.forEach((r) => {
-      router(r.path, (ctx, next) => {
+      r.scrollY = 0;
+
+      router(r.path, (ctx) => {
          pageText = r.chapter();
          pageName = r.title;
          header = ctx.hash;
-         console.log(`set scrollY to ${ctx.scrollY}`);
-         window.scrollY = scrollY;
-         next();
+         console.log(`set scrollY to ${r.scrollY}`);
+         window.scrollTo({ left: 0, top: r.scrollY });
       });
 
       router.exit(r.path, (ctx, next) => {
-        
-         debugger
-        
-         console.log(`save scrollY = ${window.scrollY}`);
-         scrollY = window.scrollY;
+         console.log(`save scrollY ${scrollY} for ${r.path}`);
+         r.scrollY = scrollY;
          next();
       });
    });
 
-   // router("*", () => {
-   //    console.log("page not found");
-   //    pageText = Error;
-   // });
-
-   // router.exit("*", (ctx, next) => {
-   //    page.scrollY = window.scrollY;
-
-   //    next();
-   // });
+   router("*", () => {
+      console.log("page not found");
+      pageText = Error;
+   });
 
    router.start();
 
@@ -66,7 +59,7 @@
    });
 </script>
 
-<svelte:window on:click={click} />
+<svelte:window on:click={click} bind:scrollY />
 
 <svelte:head>
    <title>{pageName}</title>

@@ -19,7 +19,7 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
    // check if requested resource is an import.
-   console.log(`sw - ${event.request.url}`)
+   //console.log(`sw - ${event.request.url}`)
 
    if (event.request.url.endsWith('.svelte')) {
       event.respondWith(fetch(event.request).then(response => {
