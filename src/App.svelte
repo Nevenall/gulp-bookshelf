@@ -1,11 +1,12 @@
 <script>
-   import { onMount } from "/dependencies/svelte/index.mjs";
    import Header from "./components/Header.svelte";
    import Drawer from "./components/Drawer.svelte";
+   import Capter from "./components/Chapter.svelte";
    import Error from "./components/Error.svelte";
    // this is a client dependency so right now it has to reference the dist path
    import router from "/dependencies/page/index.mjs";
    import chapters from "/book/book.js";
+   import Chapter from "./components/Chapter.svelte";
    // start on the first chapter, the README
    let pageText = chapters[0].chapter();
    let pageName = "Ghosting the Edge";
@@ -14,22 +15,24 @@
    let scrollY = 0;
 
    chapters.forEach((r) => {
-      r.scrollY = 0;
+      // r.scrollY = 0;
 
       router(r.path, (ctx) => {
          pageText = r.chapter();
          pageName = r.title;
          header = ctx.hash;
-         console.log(`set scrollY to ${r.scrollY}`);
-         window.scrollTo({ left: 0, top: r.scrollY });
-         // next();
+
+         // // todo - this is overriding the anchor scrolling
+         // console.log(`set scrollY to ${r.scrollY}`);
+         // window.scrollTo({ left: 0, top: r.scrollY });
+         // // next();
       });
 
-      router.exit(r.path, (ctx, next) => {
-         console.log(`save scrollY ${scrollY} for ${r.path}`);
-         r.scrollY = scrollY;
-         next();
-      });
+      // router.exit(r.path, (ctx, next) => {
+      //    console.log(`save scrollY ${scrollY} for ${r.path}`);
+      //    r.scrollY = scrollY;
+      //    next();
+      // });
    });
 
    // router("*", () => {
@@ -39,12 +42,7 @@
 
    router.start();
 
-   function scrollTo(header) {
-      if (!header) return;
-      let el = document.getElementById(header);
-      if (!el) return;
-      el.scrollIntoView({ behavior: "smooth" });
-   }
+   
 
    let drawer = false;
 
@@ -72,7 +70,7 @@
 
 <main>
    <div id="page" bind:this={pageElement}>
-      {@html pageText}
+      <Chapter bind:text={pageText} bind:header />
    </div>
 </main>
 
