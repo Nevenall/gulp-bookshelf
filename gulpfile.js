@@ -15,12 +15,12 @@ import { dirname } from 'path'
 import { compile, preprocess } from 'svelte/compiler'
 
 
-import gulppostcss from 'gulp-postcss'
 import postcss from 'postcss'
+import gulppostcss from 'gulp-postcss'
 import postcssloadconfig from 'postcss-load-config'
 
 import browserSync from 'browser-sync'
-import history from 'connect-history-api-fallback'
+let devServer = browserSync.create()
 
 
 let svelteOptions = {
@@ -31,15 +31,12 @@ let svelteOptions = {
 // but the service-worker will then provide that file under each component directory
 // which breaks some of the internals of component compiling
 // therefore, we replace that import path with a static one
-// const fixInternals = replace('./svelte/internal', '/dependencies/svelte/index.mjs')
 function fixInternals() {
    return replace('./svelte/internal', '/dependencies/svelte/index.mjs')
 }
 
-let devServer = browserSync.create()
-
+// clean up the dist directory before we start building
 function clean(done) {
-   // clean up the dist directory before we start building
    del('dist/**', done)
 }
 
@@ -54,26 +51,16 @@ function js() {
 }
 
 async function styles() {
-   // manually load the postcss config
-   // let config = await postcssloadconfig({ env: process.env || 'development' }, './postcss.config.js')
    return src('src/styles/**/*.css')
       // plugins configured in ./postcss.config.cjs
       .pipe(gulppostcss())
       .pipe(dest('dist/styles'))
 }
 
+
+// copy html chapters
 function chapters() {
    return src('src/book/**/*.html')
-      .pipe(through.obj(function (file, encoding, done) {
-         // todo - don't compile our chapters
-         // let source = file.contents.toString()
-         // let compiled = compile(source, { filename: file.path, ...svelteOptions })
-         // var content = compiled.js.code
-         // file.contents = Buffer.from(content)
-         //  file.extname = ".html"
-         done(null, file)
-      }))
-      .pipe(fixInternals())
       .pipe(dest('dist/book'))
 }
 
@@ -143,8 +130,8 @@ function dependencies() {
       .pipe(dest('dist/dependencies'))
 }
 
+// copy static files
 function staticFiles() {
-   // copy static files
    return src('static/**')
       .pipe(dest('dist'))
 }

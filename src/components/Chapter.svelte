@@ -1,5 +1,4 @@
 <script>
-   import Header from "./Header.svelte";
    import { afterUpdate } from "/dependencies/svelte/index.mjs";
    export let text = "";
    export let header = null;
@@ -16,7 +15,6 @@
    });
 </script>
 
-<h2>{header}</h2>
 {@html text}
 
 <style lang="postcss">

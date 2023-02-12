@@ -1,48 +1,35 @@
 <script>
    import Header from "./components/Header.svelte";
    import Drawer from "./components/Drawer.svelte";
-   import Capter from "./components/Chapter.svelte";
    import Error from "./components/Error.svelte";
+   import Chapter from "./components/Chapter.svelte";
    // this is a client dependency so right now it has to reference the dist path
    import router from "/dependencies/page/index.mjs";
    import chapters from "/book/book.js";
-   import Chapter from "./components/Chapter.svelte";
    // start on the first chapter, the README
-   let pageText = chapters[0].chapter();
-   let pageName = "Ghosting the Edge";
+   let text = chapters[0].chapter();
+   let title = "Ghosting the Edge";
    let pageElement;
    let header;
-   let scrollY = 0;
 
    chapters.forEach((r) => {
-      // r.scrollY = 0;
-
       router(r.path, (ctx) => {
-         pageText = r.chapter();
-         pageName = r.title;
+         text = r.chapter();
+         title = r.title;
          header = ctx.hash;
-
-         // // todo - this is overriding the anchor scrolling
-         // console.log(`set scrollY to ${r.scrollY}`);
-         // window.scrollTo({ left: 0, top: r.scrollY });
-         // // next();
       });
-
-      // router.exit(r.path, (ctx, next) => {
-      //    console.log(`save scrollY ${scrollY} for ${r.path}`);
-      //    r.scrollY = scrollY;
-      //    next();
-      // });
    });
 
-   // router("*", () => {
-   //    console.log("page not found");
-   //    pageText = Error;
-   // });
+   router("*", () => {
+      console.log("page not found");
+      text = `<div>
+   <h2>Error! 404</h2>
+   <h3>That's not in this book.</h3>
+</div>
+`;
+   });
 
    router.start();
-
-   
 
    let drawer = false;
 
@@ -52,17 +39,12 @@
          drawer = false;
       }
    }
-
-   // onMount(() => {
-   //    scrollTo(header);
-   //    console.log("Scrolled!");
-   // });
 </script>
 
-<svelte:window on:click={click} bind:scrollY />
+<svelte:window on:click={click} />
 
 <svelte:head>
-   <title>{pageName}</title>
+   <title>{title}</title>
 </svelte:head>
 
 <Header bind:open={drawer} />
@@ -70,7 +52,7 @@
 
 <main>
    <div id="page" bind:this={pageElement}>
-      <Chapter bind:text={pageText} bind:header />
+      <Chapter bind:text bind:header />
    </div>
 </main>
 
