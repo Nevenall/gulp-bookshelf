@@ -18,7 +18,7 @@
     "browser-sync": "^3.0.2",
     "cssnano": "^5.1.12",
     "delete": "^1.1.0",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^3.0.0",
     "gulp-postcss": "^9.0.0",
